@@ -15,7 +15,7 @@
      <% 
      
      List<Subject>  list1=(List<Subject>)request.getAttribute("userlist");
- 	int  pageLast1=request.getAttribute("pageLast1");
+ 	int  pageLast1=(int)request.getAttribute("pageLast1");
  	int  pagenumber1=(int)request.getAttribute("pagenumber1");
   
 
