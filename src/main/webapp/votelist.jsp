@@ -12,11 +12,11 @@
 
 <div id="" style="width: 250px;height: 60px;background: ;position:absolute; left: 68%;top: 105%;">
      
-     <% 
+    <%--  <% 
      
      List<Subject>  list1=(List<Subject>)request.getAttribute("userlist");
- 	int  pageLast1=(int)request.getAttribute("pageLast1");
- 	int  pagenumber1=(int)request.getAttribute("pagenumber1");
+ 	 int  pageLast1=(int)request.getAttribute("pageLast1");
+ 	int  pagenumber1=(int)request.getAttribute("pagenumber1"); 
   
 
 	if(String.valueOf(pagenumber1)!=null&&String.valueOf(pageLast1)!=null)
@@ -38,7 +38,7 @@
 			out.println("<a style='color: #975f2e;'>&nbsp下一页");
 		}
   }
- 
+  --%>
  %>  </div>
 </body>
 </html>
