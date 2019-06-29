@@ -51,4 +51,15 @@
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/LoginFilter</url-pattern>
   </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubjectListServlet</display-name>
+    <servlet-name>SubjectListServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.SubjectListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubjectListServlet</servlet-name>
+    <url-pattern>/SubjectListServlet</url-pattern>
+    <url-pattern>/sbjlist</url-pattern>
+  </servlet-mapping>
 </web-app>

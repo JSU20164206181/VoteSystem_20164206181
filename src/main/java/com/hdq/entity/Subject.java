@@ -4,6 +4,7 @@ public class Subject {
 private int vs_id;
 private String vs_title;//主题
 private int vs_type;//单选，多选
+private String vu_id;//发布用户
 public int getVs_id() {
 	return vs_id;
 }
@@ -21,5 +22,11 @@ public int getVs_type() {
 }
 public void setVs_type(int vs_type) {
 	this.vs_type = vs_type;
+}
+public String getVu_id() {
+	return vu_id;
+}
+public void setVu_id(String string) {
+	this.vu_id = string;
 }
 }
