@@ -13,6 +13,66 @@ public class SubjectDao implements SubjectInterface {
 		// TODO Auto-generated method stub
 
 	}
+	//已投票数量
+			public int getItemNum(int id) {
+				int num = 0;
+				JDBCUtil util = new JDBCUtil();
+				String sql = "select counts from item_num where VS_ID= ?";
+				ResultSet rs;
+				try {
+					rs = util.executeQuery(sql,id);
+					if (rs.next()) {
+						num = rs.getInt(1);
+					}
+
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					util.close();
+				}
+
+				return num;
+			}
+	//选项数量
+		public int getOptionNum(int id) {
+			int num = 0;
+			JDBCUtil util = new JDBCUtil();
+			String sql = "select counts from option_num where VS_ID=?";
+			ResultSet rs;
+			try {
+				rs = util.executeQuery(sql,id);
+				if (rs.next()) {
+					num = rs.getInt(1);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				util.close();
+			}
+
+			return num;
+		}
+		//主题id
+		public int getSbjId(String name) {
+			int num = 0;
+			JDBCUtil util = new JDBCUtil();
+			String sql = "select VS_ID from vote_subject where VS_TITLE=?";
+			ResultSet rs;
+			try {
+				rs = util.executeQuery(sql,name);
+				if (rs.next()) {
+					num = rs.getInt(1);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				util.close();
+			}
+
+			return num;
+		}
 	//主题数量
 	public int getSbjNum() {
 		int num = 0;
@@ -38,8 +98,10 @@ public class SubjectDao implements SubjectInterface {
 		List<Subject> sbjlist = new ArrayList<Subject>();
 		JDBCUtil util = new JDBCUtil();
 		String sql = "select * from vote_subject limit ?,?";
+		
 		ResultSet rs;
 		try {
+			
 			rs = util.executeQuery(sql,start,end);
 			Subject sbj = null;
 			while (rs.next()) {
@@ -48,7 +110,8 @@ public class SubjectDao implements SubjectInterface {
 				sbj.setVs_title(rs.getString("VS_TITLE"));
 				sbj.setVs_type(rs.getInt("VS_TYPE"));
 				sbj.setVu_id(rs.getString("VU_ID"));
-				
+				sbj.setItem_num(getItemNum(sbj.getVs_id()));
+				sbj.setOption_num(getOptionNum(sbj.getVs_id()));
 				sbjlist.add(sbj);
 			}
 
@@ -60,6 +123,7 @@ public class SubjectDao implements SubjectInterface {
 
 		return sbjlist;
 	}
+	
 //添加主题
 	public void addSbj(Subject sbj) {
 		// TODO Auto-generated method stub

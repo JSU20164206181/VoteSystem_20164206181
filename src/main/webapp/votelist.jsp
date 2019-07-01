@@ -10,20 +10,42 @@
 <%@ page import="com.hdq.entity.*" %>
 <%@ page import="java.util.List" %>
 
-<div id="" style="width: 250px;height: 60px;background: ;position:absolute; left: 68%;top: 105%;">
+
      
      <% 
+    
+     List<Subject>  list1=(List<Subject>)request.getAttribute("subjectlist");
+     System.out.println(" @@@@"+list1.size());
+     if(list1!=null){
+     int  pageLast1=(Integer)request.getAttribute("pageLast1");	
+     int  pagenumber1=(Integer)request.getAttribute("pagenumber1"); 
+     //System.out.println(" @@@@111"+pagenumber1);
+    
+  	for(int i=0;i<list1.size();i++)
+	{
+		Subject sbj=(Subject)list1.get(i);
+		// System.out.println(" @@@222  "+sbj.getVs_id());
+	%>
+		<!--userlist  -->
+		<p><%= sbj.getVs_id() %>
      
-     List<Subject>  list1=(List<Subject>)request.getAttribute("userlist");
- 	 int  pageLast1=(int)request.getAttribute("pageLast1");
- 	int  pagenumber1=(int)request.getAttribute("pagenumber1"); 
-  
+          <a  href="OptionListServlet?sbj_id=<%= sbj.getVs_id() %>"> <%= sbj.getVs_title()%> 
+          </a>
+        	<%= sbj.getVs_type() %>
+        
+        <%= sbj.getVu_id() %>
+        <%= sbj.getOption_num() %>
+        <%= sbj.getItem_num() %>
+        </p>
+ 
+<%
+   }//--forend%>
 
-	if(String.valueOf(pagenumber1)!=null&&String.valueOf(pageLast1)!=null)
+	 <% if(String.valueOf(pagenumber1)!=null&&String.valueOf(pageLast1)!=null)
 	{
 		out.println(""+pagenumber1+"/"+pageLast1+"");
 		if(pagenumber1>1)
-		{out.println("<a  href='ListSpotServlet?pagenum1="+(pagenumber1-1)+"' >&nbsp上一页</a>");
+		{out.println("<a  href='SubjectListServlet?pagenum1="+(pagenumber1-1)+"' >&nbsp上一页</a>");
 		}
 		else
 		{
@@ -31,14 +53,19 @@
 		}
 	    
 		if(pagenumber1<pageLast1)
-		{out.println("<a href='ListSpotServlet?pagenum1="+(pagenumber1+1)+"'>&nbsp;&nbsp&nbsp;下一页</a>");
+		{out.println("<a href='SubjectListServlet?pagenum1="+(pagenumber1+1)+"'>&nbsp;&nbsp&nbsp;下一页</a>");
 		}
 		else
 		{
 			out.println("<a style='color: #975f2e;'>&nbsp下一页");
 		}
   }
- 
- %>  </div>
+     }
+     
+     
+ %> 
+<a href="addsubject.jsp">发起投票</a>
+<a href="deleteObject">删除投票</a>
+  
 </body>
 </html>

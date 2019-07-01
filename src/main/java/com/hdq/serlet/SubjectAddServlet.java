@@ -1,7 +1,6 @@
 package com.hdq.serlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,19 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hdq.dao.OptionDao;
 import com.hdq.dao.SubjectDao;
+import com.hdq.entity.Option;
 import com.hdq.entity.Subject;
 
 /**
- * Servlet implementation class SubjectListServlet
+ * Servlet implementation class SubjectAddServlet
  */
-public class SubjectListServlet extends HttpServlet {
+public class SubjectAddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SubjectListServlet() {
+    public SubjectAddServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,36 +35,37 @@ public class SubjectListServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
     	request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();		
-		String pagenum=request.getParameter("pagenum1");
 		
-		int pagesize=10;
-		 
-		int pagenumber=1;
-		if( pagenum!=null){
-		pagenumber=Integer.parseInt(pagenum);}
+		String title=request.getParameter("suj_title");
+		String type=request.getParameter("suj_type");
+		String user=request.getParameter("suj_user");
+		String[] listoption=request.getParameterValues("opt_option");
+		
+		
+		int type1 = 0;
+		if( type!=null){
+			 type1= Integer.parseInt(type);
+		}
+		
+		SubjectDao  dao=new SubjectDao();
+		Subject  suj =new Subject();
+		suj.setVs_title(title);
+		suj.setVs_type(type1);
+		suj.setVu_id(user);
+		dao.addSbj(suj);
 		//
-		 
-		 int star=(pagenumber-1)*pagesize;
+		OptionDao dao2=new OptionDao();
+		dao2.addOpt(listoption, dao.getSbjId(title));
 		
-		 SubjectDao subjectlist=new SubjectDao();
-	    
-	    int all=subjectlist.getSbjNum();
-		  int pageLast=all/pagesize;
-		  if(all%pagesize>0){
-			  pageLast++;
-		  }
-		 
-		  List<Subject> rs=subjectlist.SubjectList(star,pagesize );
-		 
-		 System.out.println(star+"---aaaaaaaaaa-----test2---"+rs.size());
-		  System.out.println( pagenumber);
-		  System.out.println( pageLast);
-			 
-	      request.setAttribute("subjectlist", rs);
-	      request.setAttribute("pagenumber1",pagenumber );
-	      request.setAttribute("pageLast1",pageLast );
-		  request.getRequestDispatcher("votelist.jsp").forward(request, response);
+		
+		
+		for(int i=0;i<listoption.length;i++){
+			System.out.println(" opt: "+listoption[i]);
+			}
+		
+		
+		
+		 // request.getRequestDispatcher("SubjectListServlet").forward(request, response);
 	    	
 	}
 	/**

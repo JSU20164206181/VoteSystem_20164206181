@@ -62,4 +62,37 @@
     <url-pattern>/SubjectListServlet</url-pattern>
     <url-pattern>/sbjlist</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubjectAddServlet</display-name>
+    <servlet-name>SubjectAddServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.SubjectAddServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubjectAddServlet</servlet-name>
+    <url-pattern>/SubjectAddServlet</url-pattern>
+    <url-pattern>/subjectadd</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OptionListServlet</display-name>
+    <servlet-name>OptionListServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.OptionListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OptionListServlet</servlet-name>
+    <url-pattern>/OptionListServlet</url-pattern>
+    <url-pattern>/optionlist</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteObjectServlet</display-name>
+    <servlet-name>DeleteObjectServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.DeleteObjectServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteObjectServlet</servlet-name>
+    <url-pattern>/DeleteObjectServlet</url-pattern>
+    <url-pattern>/deleteObject</url-pattern>
+  </servlet-mapping>
 </web-app>

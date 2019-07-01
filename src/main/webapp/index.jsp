@@ -88,7 +88,7 @@
 	</div>
 
 	<div class="footer w3layouts agileits">
-		<p>Copyright &copy; More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+		<p> <a href="" target="_blank" title="hdq">@hdq</a>在线投票系统<a href="" title="网页模板" target="_blank">青软实训</a></p>
 	</div>
     <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">

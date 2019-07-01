@@ -81,7 +81,7 @@ public class LoginServlet extends HttpServlet {
 		    	  request.getRequestDispatcher("backstage.jsp").forward(request, response);		
 		      }
 		      else{
-		    	  request.getRequestDispatcher("votelist.jsp").forward(request, response);		 
+		    	  request.getRequestDispatcher("SubjectListServlet").forward(request, response);		 
 		      }
 		}
 		else{
