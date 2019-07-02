@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import com.hdq.entity.User;
 import com.hdq.util.JDBCUtil;
 
-public class UserDao implements UserInterface {
+public class UserDao {
 	//查看权限
 		public String findType(String uid){
 			String result=null ;	

@@ -67,7 +67,7 @@
 		</div>
 		<div  id="regist" class="register w3layouts agileits">
 			
-			<form action="#" method="post">
+			<form action="RegistServlet" method="post">
 				<input  id="inp21" type="text"  autofocus="autofocus"   maxlength="10" name="id" placeholder="输入9~12位账号" onfocus="if($(this).val()=='用户账号已存在') {$(this).val(''); $(this).css('color','white');}"  required="">
 				<input  id="inp22" type="text" name="name"   maxlength="20" placeholder="输入昵称" ><br>
      			<input  id="inp23" type="text" name="password1"   placeholder=" 输入密 码" maxlength="20" /><br>

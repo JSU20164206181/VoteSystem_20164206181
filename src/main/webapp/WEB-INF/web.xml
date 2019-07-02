@@ -86,13 +86,46 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>DeleteObjectServlet</display-name>
-    <servlet-name>DeleteObjectServlet</servlet-name>
-    <servlet-class>com.hdq.serlet.DeleteObjectServlet</servlet-class>
+    <display-name>DeleteSubjectServlet</display-name>
+    <servlet-name>DeleteSubjectServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.DeleteSubjectServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>DeleteObjectServlet</servlet-name>
-    <url-pattern>/DeleteObjectServlet</url-pattern>
-    <url-pattern>/deleteObject</url-pattern>
+    <servlet-name>DeleteSubjectServlet</servlet-name>
+    <url-pattern>/DeleteSubjectServlet</url-pattern>
+    <url-pattern>/deleteSubject</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MySubjectServlet</display-name>
+    <servlet-name>MySubjectServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.MySubjectServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MySubjectServlet</servlet-name>
+    <url-pattern>/MySubjectServlet</url-pattern>
+    <url-pattern>/mySubject</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ToUpdateServlet</display-name>
+    <servlet-name>ToUpdateServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.ToUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToUpdateServlet</servlet-name>
+    <url-pattern>/ToUpdateServlet</url-pattern>
+    <url-pattern>/toUpSub</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubjectUpdataServlet</display-name>
+    <servlet-name>SubjectUpdataServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.SubjectUpdataServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubjectUpdataServlet</servlet-name>
+    <url-pattern>/SubjectUpdataServlet</url-pattern>
+    <url-pattern>/subjectupdate</url-pattern>
   </servlet-mapping>
 </web-app>

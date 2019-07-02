@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ page import="javax.servlet.http.HttpSession" %>
 
 <% String uid=(String)session.getAttribute("u_id"); %>
 
@@ -17,9 +16,9 @@
   <input type="radio" name="suj_type" value="1" checked> 单选
 <input type="radio" name="suj_type" value="2"> 多选 <br>
 
-         发起人：<input  type="text" name="suj_user" value="<%= uid%>"  msize="20"/><br>
-         选项1：<input  type="text" class="option" name="opt_option" id="option1" msize="20"/><br>
-         选项2：<input  type="text" class="option"  name="opt_option" id="option2" msize="20"/><br>
+         发起人：<input  type="text" name="suj_user" value="<%= uid%>"  /><br>
+         选项1：<input  type="text" class="option" name="opt_option" id="" /><br>
+         选项2：<input  type="text" class="option"  name="opt_option" id="" /><br>
      <div id="other"></div>   
     
          <input  type="submit" value="提交" name=submit  >

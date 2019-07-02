@@ -54,6 +54,7 @@ public class RegistServlet extends HttpServlet {
 		if( u_id!=null||u_name!=null||u_pwd1!=null){
 		
 		dao.addUser(user);
+		request.getRequestDispatcher("index.jsp").forward(request, response);	
 		}
 		//System.out.println(user);
 		

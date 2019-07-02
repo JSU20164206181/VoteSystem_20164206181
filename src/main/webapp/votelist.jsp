@@ -10,7 +10,8 @@
 <%@ page import="com.hdq.entity.*" %>
 <%@ page import="java.util.List" %>
 
-
+<a href="addsubject.jsp">发起投票</a>
+<a href="mySubject">我的投票</a>
      
      <% 
     
@@ -64,8 +65,7 @@
      
      
  %> 
-<a href="addsubject.jsp">发起投票</a>
-<a href="deleteObject">删除投票</a>
+
   
 </body>
 </html>

@@ -6,13 +6,28 @@ import java.util.List;
 import com.hdq.entity.Subject;
 import com.hdq.util.JDBCUtil;
 
-public class SubjectDao implements SubjectInterface {
+public class SubjectDao  {
 
 	
-	public void findSbj(Subject sbj) {
-		// TODO Auto-generated method stub
+	//删除投票
+			public int deleteSubject(int id) {
+				int num = 0;
+				JDBCUtil util = new JDBCUtil();
+				String sql = "delete from vote_subject where VS_ID= ?";
+			try {
+					num = util.executeUpdate(sql,id); 
+					if(num>0){
+						System.out.println(id+"删除成功....");
+					}	
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					util.close();
+				}
 
-	}
+				return num;
+			}
+	
 	//已投票数量
 			public int getItemNum(int id) {
 				int num = 0;
@@ -93,6 +108,35 @@ public class SubjectDao implements SubjectInterface {
 
 		return num;
 	}
+	//查找主题信息
+		public Subject FindSubject(int id) {
+			Subject sbj = null;
+			JDBCUtil util = new JDBCUtil();
+			String sql = "select * from vote_subject  where VS_ID=?";
+			
+			ResultSet rs;
+			try {
+				
+				rs = util.executeQuery(sql,id);
+				
+				if(rs.next()) {
+					sbj = new Subject();
+					sbj.setVs_id(rs.getInt("VS_ID"));
+					sbj.setVs_title(rs.getString("VS_TITLE"));
+					sbj.setVs_type(rs.getInt("VS_TYPE"));
+					sbj.setVu_id(rs.getString("VU_ID"));
+					
+					
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				util.close();
+			}
+
+			return sbj;
+		}
 	//主题列表
 	public List<Subject> SubjectList(int start, int end) {
 		List<Subject> sbjlist = new ArrayList<Subject>();
@@ -123,7 +167,36 @@ public class SubjectDao implements SubjectInterface {
 
 		return sbjlist;
 	}
-	
+	//my主题列表
+	public List<Subject> MySubjectList(String id) {
+		List<Subject> sbjlist = new ArrayList<Subject>();
+		JDBCUtil util = new JDBCUtil();
+		String sql = "select * from vote_subject where VU_ID=?";
+		
+		ResultSet rs;
+		try {
+			
+			rs = util.executeQuery(sql,id);
+			Subject sbj = null;
+			while (rs.next()) {
+				sbj = new Subject();
+				sbj.setVs_id(rs.getInt("VS_ID"));
+				sbj.setVs_title(rs.getString("VS_TITLE"));
+				sbj.setVs_type(rs.getInt("VS_TYPE"));
+				sbj.setVu_id(rs.getString("VU_ID"));
+				sbj.setItem_num(getItemNum(sbj.getVs_id()));
+				sbj.setOption_num(getOptionNum(sbj.getVs_id()));
+				sbjlist.add(sbj);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.close();
+		}
+
+		return sbjlist;
+	}	
 //添加主题
 	public void addSbj(Subject sbj) {
 		// TODO Auto-generated method stub
@@ -145,6 +218,27 @@ public class SubjectDao implements SubjectInterface {
 
 		
 	}
+	//更新主题
+		public void updataSbj(Subject sbj) {
+			// TODO Auto-generated method stub
+			
+				int num;
+				JDBCUtil util = new JDBCUtil();
+				String sql="update vote_subject set VS_TITLE=?,VS_TYPE=? where VS_ID=?";
+				try {
+					num = util.executeUpdate(sql,sbj.getVs_title(),sbj.getVs_type(),sbj.getVs_id()); 
+					if(num>0){
+						System.out.println(sbj.getVs_title()+"更新成功....");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}finally{
+					util.close();
+				}
+				
+
+			
+		}
 
 	public static void main(String[] args) {
 		
@@ -172,6 +266,7 @@ public class SubjectDao implements SubjectInterface {
 		
 	}
 
+	
 	
 
 }

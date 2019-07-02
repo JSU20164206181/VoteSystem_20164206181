@@ -1,17 +1,61 @@
 package com.hdq.dao;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.hdq.entity.Option;
-import com.hdq.entity.Subject;
 import com.hdq.util.JDBCUtil;
 
-public class OptionDao implements OptionInterface {
+public class OptionDao  {
 
-	
+	public int updateOpt(String[] list,int id ) {
+		// TODO Auto-generated method stub
+		int num1=0;
+		int num2=0;
+		int num3=0;
+		JDBCUtil util = new JDBCUtil();
+		int[] order = new int[list.length];
+		Connection con=util.getConn();
+		
+		String sql1="insert into vote_option(VS_ID,VO_OPTION,VO_ORDER)values(?,?,?)";
+		String sql2="update vote_option set VO_OPTION=?where VO_ORDER=? and VS_ID=? ";//****
+		String sql3 = "delete from vote_option where VO_ORDER=? and VS_ID=? ";
+		try {
+			con.setAutoCommit(false);
+			System.out.println("optnum:"+this.getOptNum(id)+" list.length: "+list.length);
+			for(int i=this.getOptNum(id);i>(list.length);i--){
+				
+				num3=num3+util.executeUpdate(sql3,i,id);
+				//System.out.println(i+"删除:"+num3+"第：  "+i);
+			}
+			for(int i=0;i< list.length;i++){
+				order[i]=this.getOptNum(id);
+				if(i>(this.getOptNum(id)-1)){
+					order[i]=order[i]+1;
+				num1 =num1+util.executeUpdate(sql1,id,list[i],order[i]);
+				}
+				else{
+					num2=num2+util.executeUpdate(sql2,list[i],i+1,id);
+					//System.out.println(i+"修改:"+num2+" name "+list[i]);
+				}
+			}
+
+			con.commit();
+			System.out.println("选项修改:"+num2);		
+			System.out.println("选项插入:"+num1);	
+			System.out.println("选项删除:"+num3);	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			util.close();
+		}
+		
+		return num1;
+		
+	}
 
 	public int addOpt(String[] list,int id ) {
 		// TODO Auto-generated method stub

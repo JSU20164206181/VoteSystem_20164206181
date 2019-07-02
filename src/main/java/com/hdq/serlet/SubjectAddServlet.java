@@ -59,13 +59,13 @@ public class SubjectAddServlet extends HttpServlet {
 		
 		
 		
-		for(int i=0;i<listoption.length;i++){
+		/*for(int i=0;i<listoption.length;i++){
 			System.out.println(" opt: "+listoption[i]);
-			}
+			}*/
 		
 		
 		
-		 // request.getRequestDispatcher("SubjectListServlet").forward(request, response);
+		 request.getRequestDispatcher("SubjectListServlet").forward(request, response);
 	    	
 	}
 	/**

@@ -14,6 +14,12 @@ public class JDBCUtil {
 	private final static String USER_PASS = "123456";
 
 	private Connection conn = null;
+	public Connection getConn() {
+		return conn;
+	}
+
+
+	
 	private PreparedStatement stat = null;
 	private ResultSet rs = null;
 	

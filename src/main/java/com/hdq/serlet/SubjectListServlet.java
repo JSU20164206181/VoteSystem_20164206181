@@ -56,9 +56,9 @@ public class SubjectListServlet extends HttpServlet {
 		 
 		  List<Subject> rs=subjectlist.SubjectList(star,pagesize );
 		 
-		 System.out.println(star+"---aaaaaaaaaa-----test2---"+rs.size());
+		 /*System.out.println(star+"---aaaaaaaaaa-----test2---"+rs.size());
 		  System.out.println( pagenumber);
-		  System.out.println( pageLast);
+		  System.out.println( pageLast);*/
 			 
 	      request.setAttribute("subjectlist", rs);
 	      request.setAttribute("pagenumber1",pagenumber );
