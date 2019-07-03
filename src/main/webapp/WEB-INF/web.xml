@@ -128,4 +128,37 @@
     <url-pattern>/SubjectUpdataServlet</url-pattern>
     <url-pattern>/subjectupdate</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TakeOptionServlet</display-name>
+    <servlet-name>TakeOptionServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.TakeOptionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TakeOptionServlet</servlet-name>
+    <url-pattern>/TakeOptionServlet</url-pattern>
+    <url-pattern>/takeOption</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VoteResultServlet</display-name>
+    <servlet-name>VoteResultServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.VoteResultServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VoteResultServlet</servlet-name>
+    <url-pattern>/VoteResultServlet</url-pattern>
+    <url-pattern>/voteResult</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SofaExitServlet</display-name>
+    <servlet-name>SofaExitServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.SofaExitServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SofaExitServlet</servlet-name>
+    <url-pattern>/SofaExitServlet</url-pattern>
+    <url-pattern>/sofaExit</url-pattern>
+  </servlet-mapping>
 </web-app>

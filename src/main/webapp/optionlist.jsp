@@ -11,21 +11,37 @@
 <%@ page import="java.util.List" %>
 <%
 List<Option>  list1=(List<Option>)request.getAttribute("optlist");
+Subject sub=(Subject)request.getAttribute("subject");%>
 
-	for(int i=0;i<list1.size();i++)
-{
-		Option opt=(Option)list1.get(i);
-	
+
+
+<h2> <%= sub.getVs_title() %></h2>
+<p> 共<%= sub.getOption_num()%>个选项，已有<%=sub.getItem_num()%>个参与投票</p>
+<%if(sub.getVs_type()==1) {%>
+
+<p> 此投票为单选，请选择一个选项</p>
+<%}else{ %>
+<p> 此投票为多选，请选择一个或多个选项</p>
+<%} %>
+
+<form  action="takeOption" method="post">
+<input name="subject" value="<%= sub.getVs_id() %>" > </br>
+<% 	for(int i=0;i<list1.size();i++)
+{      
+		Option opt=(Option)list1.get(i);	
 %>
-<p>
+<%if(sub.getVs_type()==1) {%>
 
-<%= opt.getOption_name()%>
-</p>
- 
-<%
-   } //--forend %>
-
-	
-	
+<p><input type="radio" name="option" value="<%=opt.getOption_id() %>" >
+<%System.out.println("opt.getOption_id()"+opt.getOption_id());
+}else{ %>
+<p><input type="checkbox" name="option" value="<%=opt.getOption_id() %>" />
+<%System.out.println("opt.getOption_id():"+opt.getOption_id());
+} %>
+<%= opt.getOption_name()%></p> 
+<%} //--forend %>
+     <input  type="submit" value="确定" name=submit  >
+    </form>
+     <a  href="SubjectListServlet"> 返回 </a>
 </body>
 </html>

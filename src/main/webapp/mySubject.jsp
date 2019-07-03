@@ -10,13 +10,13 @@
 <%@ page import="com.hdq.entity.*" %>
 <%@ page import="java.util.List" %>
 
-<a href="addsubject.jsp">发起投票</a>
+
 <a href="SubjectListServlet">返回</a>
      
      <% 
      
      List<Subject>  list1=(List<Subject>)request.getAttribute("subjectlist");
-     System.out.println(" @@@@"+list1.size());
+    // System.out.println(" @@@@"+list1.size());
      if(list1!=null){
      int  pageLast1=(Integer)request.getAttribute("pageLast1");	
      int  pagenumber1=(Integer)request.getAttribute("pagenumber1"); 

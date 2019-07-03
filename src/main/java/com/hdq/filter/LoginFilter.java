@@ -37,19 +37,22 @@ public class LoginFilter implements Filter {
 			FilterChain arg2) throws IOException, ServletException {
 		     HttpServletRequest request=(HttpServletRequest)arg0;
 		     HttpServletResponse response=(HttpServletResponse)arg1;
-		     HttpSession session=request.getSession();
 		     
-		     
+		     request.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");
+			
+		     HttpSession session=request.getSession();		     
 		    String uid=(String)session.getAttribute("u_id");
 		    String upwd=(String)session.getAttribute("u_pwd");
+		    System.out.println("uid___aaa"+uid);
 		    
-		       if(uid!=null&&upwd!=null&&uid.equals("")&&upwd.equals("")){
-		    	
-		    	   arg2.doFilter(arg0, arg1);
+		       if(uid==null||upwd==null||uid.equals("")||upwd.equals("")){
+		    	   response.sendRedirect("index.jsp");
 		    	  
 		       }else{
 		    	   
-		    	   response.sendRedirect("index.jsp");
+		    	   arg2.doFilter(arg0, arg1);
+			    	  
 		       }
 		     
 		    	  

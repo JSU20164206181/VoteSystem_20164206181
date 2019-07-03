@@ -10,7 +10,7 @@ import com.hdq.entity.Option;
 import com.hdq.util.JDBCUtil;
 
 public class OptionDao  {
-
+//
 	public int updateOpt(String[] list,int id ) {
 		// TODO Auto-generated method stub
 		int num1=0;
@@ -120,6 +120,7 @@ public class OptionDao  {
 				Option option = null;
 				while (rs.next()) {
 					option = new Option();
+					option.setOption_id(rs.getInt("VO_ID"));
 					option.setObject_id(rs.getInt("VS_ID"));
 					option.setOption_name(rs.getString("VO_OPTION"));
 					optlist.add(option);

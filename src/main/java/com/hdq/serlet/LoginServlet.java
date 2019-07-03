@@ -77,6 +77,7 @@ public class LoginServlet extends HttpServlet {
 		if(dao.findPassWord(u_id).equals(u_pwd)){
 			System.out.println("密码正确");
 	  	   session.setAttribute("u_pwd", u_pwd);
+	  	 session.setAttribute("u_type",dao.findType(u_id));
 		      if(dao.findType(u_id).equals("9")){
 		    	  request.getRequestDispatcher("backstage.jsp").forward(request, response);		
 		      }

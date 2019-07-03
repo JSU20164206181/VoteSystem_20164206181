@@ -68,7 +68,7 @@ public class SubjectUpdataServlet extends HttpServlet {
 		
 		
 		
-		 //request.getRequestDispatcher("SubjectListServlet").forward(request, response);response.getWriter().append("Served at: ").append(request.getContextPath());
+		 request.getRequestDispatcher("MySubjectServlet").forward(request, response);
 	}
 
 	/**

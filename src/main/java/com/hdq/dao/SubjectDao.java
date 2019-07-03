@@ -9,7 +9,7 @@ import com.hdq.util.JDBCUtil;
 public class SubjectDao  {
 
 	
-	//删除投票
+	//删除主题
 			public int deleteSubject(int id) {
 				int num = 0;
 				JDBCUtil util = new JDBCUtil();
@@ -125,8 +125,8 @@ public class SubjectDao  {
 					sbj.setVs_title(rs.getString("VS_TITLE"));
 					sbj.setVs_type(rs.getInt("VS_TYPE"));
 					sbj.setVu_id(rs.getString("VU_ID"));
-					
-					
+					sbj.setItem_num(getItemNum(sbj.getVs_id()));
+					sbj.setOption_num(getOptionNum(sbj.getVs_id()));					
 				}
 
 			} catch (SQLException e) {

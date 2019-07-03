@@ -37,7 +37,7 @@ public class SubjectListServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();		
 		String pagenum=request.getParameter("pagenum1");
 		
-		int pagesize=10;
+		int pagesize=9;
 		 
 		int pagenumber=1;
 		if( pagenum!=null){
@@ -59,7 +59,8 @@ public class SubjectListServlet extends HttpServlet {
 		 /*System.out.println(star+"---aaaaaaaaaa-----test2---"+rs.size());
 		  System.out.println( pagenumber);
 		  System.out.println( pageLast);*/
-			 
+			
+		  
 	      request.setAttribute("subjectlist", rs);
 	      request.setAttribute("pagenumber1",pagenumber );
 	      request.setAttribute("pageLast1",pageLast );
