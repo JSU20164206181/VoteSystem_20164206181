@@ -32,12 +32,10 @@ public class SubjectListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-    	request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();		
+    	
 		String pagenum=request.getParameter("pagenum1");
 		
-		int pagesize=9;
+		int pagesize=10;
 		 
 		int pagenumber=1;
 		if( pagenum!=null){

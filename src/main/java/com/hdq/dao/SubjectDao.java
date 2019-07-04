@@ -138,7 +138,7 @@ public class SubjectDao  {
 			return sbj;
 		}
 	//主题列表
-	public List<Subject> SubjectList(int start, int end) {
+	public List<Subject> SubjectList(int start,int size) {
 		List<Subject> sbjlist = new ArrayList<Subject>();
 		JDBCUtil util = new JDBCUtil();
 		String sql = "select * from vote_subject limit ?,?";
@@ -146,7 +146,7 @@ public class SubjectDao  {
 		ResultSet rs;
 		try {
 			
-			rs = util.executeQuery(sql,start,end);
+			rs = util.executeQuery(sql,start,size);
 			Subject sbj = null;
 			while (rs.next()) {
 				sbj = new Subject();
@@ -168,15 +168,15 @@ public class SubjectDao  {
 		return sbjlist;
 	}
 	//my主题列表
-	public List<Subject> MySubjectList(String id) {
+	public List<Subject> MySubjectList( int star,int size ,String id) {
 		List<Subject> sbjlist = new ArrayList<Subject>();
 		JDBCUtil util = new JDBCUtil();
-		String sql = "select * from vote_subject where VU_ID=?";
+		String sql = "select * from vote_subject where VU_ID=? limit ?,? ";
 		
 		ResultSet rs;
 		try {
 			
-			rs = util.executeQuery(sql,id);
+			rs = util.executeQuery(sql,id,star,size);
 			Subject sbj = null;
 			while (rs.next()) {
 				sbj = new Subject();

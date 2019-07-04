@@ -32,39 +32,38 @@ public class MySubjectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out=response.getWriter();		
 		String pagenum=request.getParameter("pagenum1");
 		HttpSession session=request.getSession();
 		 String uid=(String)session.getAttribute("u_id"); 
 		 
-		int pagesize=10;
+		 int pagesize=10;
 		 
-		int pagenumber=1;
-		if( pagenum!=null){
-		pagenumber=Integer.parseInt(pagenum);}
-		//
-		 
+			int pagenumber=1;
+			if( pagenum!=null){
+			pagenumber=Integer.parseInt(pagenum);}
+			//
+			 
+			 int star=(pagenumber-1)*pagesize;
+			
+			 SubjectDao subjectlist=new SubjectDao();
+		    
+		    int all=subjectlist.getSbjNum();
+			  int pageLast=all/pagesize;
+			  if(all%pagesize>0){
+				  pageLast++;
+			  }
+			 
 		
 		
-		 SubjectDao subjectlist=new SubjectDao();
+		
 		 Subject  sub=new Subject();
 		 
-		  List<Subject> rs=subjectlist.MySubjectList(uid);
+		  List<Subject> rs=subjectlist.MySubjectList(star,pagesize,uid);
 		/*  for(int i=0;i<rs.size();i++){
 			  sub=rs.get(i);
 			  System.out.println(uid+"--sub.getVu_id--"+sub.getVu_id());		
 		  }*/
-	    
-	      int all=rs.size();
-		  int pageLast=all/pagesize;
-		  if(all%pagesize>0){
-			  pageLast++;
-		  }		
-		  
-		
-	      request.setAttribute("subjectlist", rs);
+          request.setAttribute("subjectlist", rs);
 	      request.setAttribute("pagenumber1",pagenumber );
 	      request.setAttribute("pageLast1",pageLast );
 		  request.getRequestDispatcher("mySubject.jsp").forward(request, response);
