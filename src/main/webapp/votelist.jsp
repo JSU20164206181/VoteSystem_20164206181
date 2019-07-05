@@ -77,7 +77,7 @@
 		
 	%>
 		<div id="" class="list">
-              <%if(i==9){ %>
+              <%if(i==list1.size()-1){ %>
                <div class="row" style=" border: solid 3px #7b7a7a ;" >
               <%}else{ %>
               
@@ -113,6 +113,7 @@
   	</div>
   </div>
   </div>
+  
 		
  
 <%
@@ -145,9 +146,10 @@
 	 
  	 </div>
  	</div>
+ 	
  	<div  class=""> <h3  style=" text-align: center;"> 青软实训 &nbsp;&nbsp;&nbsp; 在线投票系统&nbsp;&nbsp;&nbsp; 韩东亲</h3>   </div>
  </div>
-
+</div>
   
 </body>
 </html>

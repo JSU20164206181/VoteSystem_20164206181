@@ -67,7 +67,7 @@ public class SubjectUpdataServlet extends HttpServlet {
 			}*/
 		
 		
-		
+		 
 		 request.getRequestDispatcher("MySubjectServlet").forward(request, response);
 	}
 
