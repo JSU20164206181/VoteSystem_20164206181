@@ -21,7 +21,7 @@
 <%@ page import="com.hdq.dao.*" %>
 <%@ page import="java.util.List" %>
 
-
+<% String uid=(String)session.getAttribute("u_id"); %>
      
     
 
@@ -31,7 +31,7 @@
     <div class="header_resize">
       <div class="logo">
       	
-        <h1><a href="index.jsp">在线投票系统<small>Cast your vote</small></a></h1>
+        <h1><a href="index.jsp">在线投票系统<small></br>Cast your vote</small></a></h1>
       </div>
       <div class="search">
         <form method="get" id="search" action="">
@@ -59,13 +59,16 @@
       <div class="clr"></div>
   </div>
  </div>
- 
+  
  <div  class="maincont">
  	<div id="" class="maincont_top" >	</div>
+ 	 
  	<div id="" class="maincont_top_1" > 
+ 	
  	<a class="fa fa-reply" aria-hidden="true" href="SubjectListServlet"></a>
  	<a href="addsubject.jsp"  class="fa fa-plus" aria-hidden="true"></a>
  		</div>
+ 		
  	<div class="maincont_middle" >
  	 <div class="listcontant"  >
 
@@ -73,19 +76,11 @@
      
  <!--  列表    -->
      <% 
-     String uid=(String)session.getAttribute("u_id");
+    
      String error=(String)session.getAttribute("error");
      List<Subject>  list1=(List<Subject>)request.getAttribute("subjectlist");
-     %>
-    
-     <div id="myAlert2" class="alert alert-warning">
-     <a href="#" class="close" data-dismiss="alert">&times;</a>
-     <strong><%=error %></strong>
-     </div>
-
-    <%
-   
-     if(list1!=null){
+     
+   if(list1!=null){
     int  pageLast1=(Integer)request.getAttribute("pageLast1");	
     int  pagenumber1=(Integer)request.getAttribute("pagenumber1"); 
     //System.out.println(" @@@@111"+pagenumber1);
@@ -98,16 +93,15 @@
 		<!--userlist  -->     
        
  <div class="list">
- 	 			   <%if(i==list1.size()-1){ %>
+ 	 			<%if(i==list1.size()-1){ %>
                <div class="row" style=" border: solid 3px #7b7a7a ;" >
-              <%}else{ %>
-              
- 	 			   <div class="row" >
- 	 			   <%} %>
+              <%}else{ %>              
+ 	 		 <div class="row" >
+ 	 		<%} %>
 		<!--userlist  -->
 		<div class="col-md-6 col-lg-8" >
-      	<h3><%= (pagenumber1-1)*10+i+1 %>  &nbsp;&nbsp;&nbsp; <a  href="voteResult?sbj_id=<%= sbj.getVs_id() %>"> <%= sbj.getVs_title()%>   </a>&nbsp;&nbsp;&nbsp;
-
+      	<h3><%= (pagenumber1-1)*10+i+1 %>  &nbsp;&nbsp;&nbsp; 
+      	<a  href="voteResult?sbj_id=<%= sbj.getVs_id() %>"> <%= sbj.getVs_title()%>   </a>&nbsp;&nbsp;&nbsp;
       	 </h3>  
      	<p style="margin-left: 50px;">
       	此投票共 
@@ -131,45 +125,36 @@
               
       </div>
       <div class="col-md-6 col-lg-4" style="padding-top:10px;"> 
-      
-         <a data-toggle="modal" data-target="#myModal" class="fa fa-trash" aria-hidden="true"  herf="#" onclick="Delete(<%= sbj.getVs_id()%>)"  >
-          <span  class="update" style="font-size: 12px;" > 删除</span></a>    
-             
-      
-        <a class="fa fa-paint-brush" aria-hidden="true" href="ToUpdateServlet?sbj_id=<%= sbj.getVs_id() %>" onmouseover="Update(<%= sbj.getVs_id()%>)" >
+ <%if(sbj.getItem_num()==0) {%>
+        <a class="fa fa-paint-brush" aria-hidden="true" href="ToUpdateServlet?sbj_id=<%= sbj.getVs_id() %>">
           <span   class="delete" id="delete" style="font-size: 12px;">修改</span></a> 
-        
+        <%} else{%>
+        <a  data-toggle="modal" data-target="#myModal2" class="fa fa-paint-brush black-herf" aria-hidden="true" href="#" >
+          <span   class="delete" id="delete" style="font-size: 12px;">修改</span></a> 
+        <%} %>
+          <a data-toggle="modal" data-target="#myModal" class="fa fa-trash black-herf" aria-hidden="true"  herf="#"  onclick="Delete(<%= sbj.getVs_id()%>)"  >
+          <span  class="update" style="font-size: 12px;" > 删除</span></a>  
   	</div>
   </div>
   </div>
-  	
-	
-		
- 
-<%
-   }//--forend%>   
+  
+  
+<%}//--forend  %> 	
+
    <div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="padding-left:8%">
 		<div class="modal-content" style="width: 400px ;height: 300px; top: 200px;background: url(images/main_bg.jpg);opacity: 0.8;">
-		<!--	<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title" id="myModalLabel">
-					删除话题
-				</h4>
-			</div>-->
 			<div class="modal-body " style="height: 120px;  font-size: 20px; color: #000000; text-align: center;padding-top: 50px;color: white;" >
-				是否确认删除话题？<br>删除后不可恢复!
+				是否确认删除话题？<br><br>删除后不可恢复!
 			</div>
 			<div class="modal-footer" style="border: hidden;">
 				<form action="deleteSubject" method="post">
 				<button type="submit"  class="send-button"  name="sbj_id" id="deleteUp"  style="  
-				color:red;width: 100px;height: 40px;margin-right: 120px; margin-top: 50px;">
+				color:red;width: 100px;height: 40px;margin-right: 40px; margin-top: 50px;">
 					<strong>确 &nbsp;认</strong>
 				</button>
 				<button type="button"  class="send-button" data-dismiss="modal"  style="  
-		width: 100px;height: 40px;margin-right: 20px; margin-top: 50px;">
+		width: 100px;height: 40px;margin-right: 40px; margin-top: 50px;">
 					取&nbsp;消
 				</button>
 				</form>
@@ -177,6 +162,28 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>    
+
+
+
+
+   <div class="modal fade"  id="myModal2"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div class="modal-dialog" style="padding-left:8%">
+		<div class="modal-content" style="width: 400px ;height: 300px; top: 200px;background: url(images/main_bg.jpg);opacity: 0.8;">
+			<div class="modal-body " style="height: 120px;  font-size: 20px; color: #000000; text-align: center;padding-top: 50px;color: white;" >
+				该话题已有投票<br>不能继续修改!
+			</div>
+			<div class="modal-footer" style="border: hidden;  align-content:center; text-align: center;">
+			
+				<button type="button"  class="send-button" data-dismiss="modal"  style="  
+		width: 100px;height: 40px; margin-top: 50px; margin-right: 40px;">
+					知&nbsp;道&nbsp;了
+				</button>
+			
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>  
+
 <div class="maincont_bottom">
     <% if(String.valueOf(pagenumber1)!=null&&String.valueOf(pageLast1)!=null)
 	{
@@ -200,13 +207,11 @@
     }   
       
      
- %> 
- 
-
+   %> 
 </div>
  </div>
  	</div>
- <div  class=""> <h3  style=" text-align: center; "> 青软实训 &nbsp;&nbsp;&nbsp; 在线投票系统&nbsp;&nbsp;&nbsp; 韩东亲</h3>   </div>
+ <div  class=""> <h3  style="margin-top:50px; text-align: center; "> 青软实训 &nbsp;&nbsp;&nbsp; 在线投票系统&nbsp;&nbsp;&nbsp; 韩东亲</h3>   </div>
  </div>
  </div>
   
@@ -214,29 +219,8 @@
 	<script type="text/javascript">	
 
 	function Delete(ID){
-		$("#deleteUp").val(ID);
-		alert($("#deleteUp").val());
-		
-		
+		$("#deleteUp").val(ID);		
 	}
-	 
-	/*  function Update(ID){//ajax 验证是否有投票
-	        var xhr=new XMLHttpRequest();
-	        xhr.onreadystatechange=function(){      
-	              if(xhr.readyState==4&&xhr.status==200){
-	          
-	                        var txt=xhr.responseText;  
-	                        if(txt=="h"){	
-		  	               alert("aaaaaaaa");  } 	          
-	          }
-	              }
-	        
-	          xhr.open("get", "ToUpdateServlet?s_id_ajax="+ID, true);   
-	          xhr.send(null);
-	          
-	    };
-	 */
-	
 	$(document).ready(function(){
 		
 			

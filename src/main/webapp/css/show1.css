@@ -1,0 +1,17 @@
+section {
+	width: 1000px;	
+	color:white;
+	padding: 60px 0;
+	margin: 20px auto;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	position: relative;
+	
+    border: 2px ridge rgba(238, 238, 238, 0.13);
+    border-radius: 5px;
+    -moz-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    -webkit-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    border-bottom: none;
+    border-bottom-left-radius: initial;
+    border-bottom-right-radius: initial;
+}

@@ -11,30 +11,30 @@ html, .main { padding:0; margin:0; background:#fbfbfb;}
 h2 { font:bold 24px Arial, Helvetica, sans-serif; padding:8px 0; margin:8px 0; color:#323a3f;}
 p { margin:8px 0; padding:0 0 8px 0; font:normal 12px/1.8em Arial, Helvetica, sans-serif;}
 p.spec { text-align:right;}
-a { color:#d76002; text-decoration:underline;}
-a,a:hover { color:#7b7a7a; text-decoration:none;}
-a.rm, a.com { padding:0; text-decoration:none; color:#fff;}
+.black-herf {color:#000000; text-decoration:none;} /* 使特殊非链接颜色一致 */
  a{
             text-decoration: none;
         }
         /*默认状态*/
          a:link{
           color: #000000;
+           text-decoration:none;
           
         }
         /*访问后得状态*/
          a:visited{
              color: #000000;
-             opacity: 0.5;
+             text-decoration:none;
+            
         }
         /*鼠标悬浮状态*/
          a:hover{
               color: #5489ce;
+               text-decoration:none;
         }
         /*点击状态*/
          a:active{
-          
-           
+                    
         }
 
 h1 { margin:0; padding:20px 0; color:#e1e9df; font:bold 40px/1.2em Arial, Helvetica, sans-serif; letter-spacing:-2px;}
@@ -146,6 +146,7 @@ padding-top:30px;
 	
 }
 
+
 input[type="text"], input[type="password"] {
     width: 93.4%;
     margin-bottom: 20px;
@@ -163,10 +164,12 @@ input[type="text"], input[type="password"] {
     margin-bottom: 10px;
 }
 
-.send-button  {
-   
-    padding: 5px 0;
-    font-size: 20px;
+.send-button input[type="submit"] , button {
+    width: 40%;
+    margin-top:10px;
+    margin-left: 10%;
+    padding: 10px 0;
+    font-size: 16px;
     font-weight: 100;
     background-color: transparent;
     color: #CCC;
@@ -184,7 +187,7 @@ input[type="text"], input[type="password"] {
 
 /*--w3layouts--*/
 /*--agileits--*/
-.send-button :hover {
+.send-button input[type="submit"]:hover , button:hover {
     background-color: #000;
     border: 1px solid #FFF;
     color: #FFF;
@@ -193,4 +196,25 @@ input[type="text"], input[type="password"] {
     -moz-transition:0.5s all;
     -o-transition:0.5s all;
     -ms-transition:0.5s all;
+    text-decoration: none;
+}
+.notlogin{
+	width: 40%;
+	height:400px;
+	font-size:30px;
+	 text-align: center; 
+	 
+	color:white;
+	padding-top: 80px;
+	margin: 20px auto;
+	
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	 background-color: rgba(10, 10, 10, 0.4);
+    border: 2px ridge rgba(238, 238, 238, 0.13);
+    border-radius: 5px;
+    -moz-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    -webkit-box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+    box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
+ 
+	
 }

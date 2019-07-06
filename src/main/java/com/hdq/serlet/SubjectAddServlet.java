@@ -56,16 +56,8 @@ public class SubjectAddServlet extends HttpServlet {
 		//
 		OptionDao dao2=new OptionDao();
 		dao2.addOpt(listoption, dao.getSbjId(title));
-		
-		
-		
-		/*for(int i=0;i<listoption.length;i++){
-			System.out.println(" opt: "+listoption[i]);
-			}*/
-		
-		
-		
-		 request.getRequestDispatcher("SubjectListServlet").forward(request, response);
+
+		 request.getRequestDispatcher("MySubjectServlet").forward(request, response);
 	    	
 	}
 	/**

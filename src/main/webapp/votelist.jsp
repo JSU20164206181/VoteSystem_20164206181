@@ -34,7 +34,7 @@
     <div class="header_resize">
       <div class="logo">
       	
-        <h1><a href="index.jsp">在线投票系统<small>Cast your vote</small></a></h1>
+        <h1><a href="index.jsp">在线投票系统<small></br>Cast your vote</small></a></h1>
       </div>
       <div class="search">
         <form method="get" id="search" action="">
@@ -100,16 +100,22 @@
       	
               
       </div>
-      <div class="col-md-6 col-lg-4" >       
+      <div class="col-md-6 col-lg-4" >   
+          
         <%
         ItemDao dao3=new ItemDao();
         String status;
+        if(uid==null){%>
+       
+        	<a data-toggle="modal" data-target="#myModal1"  style="font-size: 16px; "> 参与投票 </a>
+         <% }else{
+        
         if(dao3.haveIteam(uid,sbj.getVs_id())>0){%>
         	<a style="font-size: 16px; "> &nbsp;已投票 </a>         	
        <%  }
         else{%>
-        	<a  href="OptionListServlet?sbj_id=<%= sbj.getVs_id() %>" style="font-size: 16px; "> 参与投票 </a>
-        <%}%>
+        	<a data-toggle="modal" data-target="#myModal2"  href="OptionListServlet?sbj_id=<%= sbj.getVs_id() %>" style="font-size: 16px; "> 参与投票 </a>
+        <%}}%>
   	</div>
   </div>
   </div>
@@ -118,6 +124,35 @@
  
 <%
    }//--forend%>
+   <div class="modal fade"  id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="padding-left:0% ;">
+<div class="modal-content" style="opacity: 0.1;">	
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>    
+   
+   <div class="modal fade"  id="myModal1"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div class="modal-dialog" style="padding-left:-8%">
+		<div class="modal-content" style="width: 400px ;height: 300px; top: 200px;background: url(images/main_bg.jpg);opacity: 0.8;">
+			<div class="modal-body " style="height: 120px;  font-size: 20px; color: #000000; text-align: center;padding-top: 50px;color: white;" >
+				你还没有登录<br>不能进行投票!
+			</div>
+			<div  class="modal-footer" style="border: hidden;  align-content:center; text-align: center;">
+				<form action="index.jsp" method="post">
+			<button   type="submit"  class="send-button"  name="sbj_id" id="deleteUp"  style="  
+				color:blue;width: 100px;height: 40px;margin-right: 40px; margin-top: 50px;">
+					<strong >登&nbsp;录</strong>
+				</button>
+				<button type="button"  class="send-button" data-dismiss="modal"  style="  
+		width: 100px;height: 40px;margin-right: 40px; margin-top: 50px;">
+					知道了
+				</button>
+				</form>
+			
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div> 
    <div class="maincont_bottom">
     <% if(String.valueOf(pagenumber1)!=null&&String.valueOf(pageLast1)!=null)
 	{
@@ -147,7 +182,7 @@
  	 </div>
  	</div>
  	
- 	<div  class=""> <h3  style=" text-align: center;"> 青软实训 &nbsp;&nbsp;&nbsp; 在线投票系统&nbsp;&nbsp;&nbsp; 韩东亲</h3>   </div>
+ 	<div  class=""> <h3  style="margin-top:50px; text-align: center;"> 青软实训 &nbsp;&nbsp;&nbsp; 在线投票系统&nbsp;&nbsp;&nbsp; 韩东亲</h3>   </div>
  </div>
 </div>
   
