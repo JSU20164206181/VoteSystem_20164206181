@@ -71,35 +71,50 @@
 		<input type="text" name="suj_title"  value="<%= sub.getVs_title()  %>" size="20"/></div>
 		
 		<div class=" col-md-4 col-lg-4" >  <p >投票类型:</p></div>	
-		<div class="  col-md-8 col-lg-8" style="height:61px;padding-top:20px; "> 	
+		<div class="  col-md-8 col-lg-8 selectdiv" style="height:61px; width:60%"> 
 		 <%if( sub.getVs_type()==1){ %>  
-		 <div style="margin-right:20px"><input  type="radio" name="suj_type" checked="checked" value="1" > 单选&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input   type="radio" name="suj_type" value="2"> 多选</div>
-		
+	
+			
+	     <select class="" id="sbj_type" name="suj_type"  >
+                      <option value="1" selected>单选</option>
+                        <option value="2">多选</option>
+                   
+              </select>
  	 
 	<%}else if( sub.getVs_type()==2){ %> 
-	 <div style="margin-right:20px"> <input   type="radio" name="suj_type" value="1" > 单选&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="radio" checked="checked" name="suj_type" value="2"> 多选 <br></div>
+   <select class="" id="sbj_type" name="suj_type"  >
+                         <option value="1" >单选</option>
+                        <option value="2" selected>多选</option>
+              </select>
 	
 	<%} %>
 		</div>
 		
+		
  <input   type="hidden" name="suj_user" value="<%=sub.getVu_id() %>"  msize="20"/>
  		
-          <div class="col-md-12 col-lg-12"  > <p>选项列表</p></div>
+          <div class="col-md-12 col-lg-12" style="font-size:30px;margin-top:20px;"   > <p>选项列表</p></div>
            
            
-        <div class="  col-md-4 col-lg-4" > <p >  选项1：</p>  </div>
+        <div class="  col-md-4 col-lg-4" > <p >  选&nbsp;项&nbsp;1：</p>  </div>
 		<div class=" col-md-8 col-lg-8" >            
        <input  type="text" class="option" name="opt_option" id="value1" msize="20"/>  </div>
- 	    <div class="  col-md-4 col-lg-4" > <p > 选项2：</p>  </div>
+ 	    <div class="  col-md-4 col-lg-4" > <p > 选&nbsp;项&nbsp;2：</p>  </div>
 		<div class=" col-md-8 col-lg-8" > 
         <input  type="text" class="option"  name="opt_option" id="value2" msize="20"/></div>
        
      	<div id="other"> </div>               
-     	 <input  type="submit" style=" " value="提交" name=submit  >
-         <button class="add rentbutton" type="button" onclick="addInput()"> 添加选项</button>
-        
+     		<div class="canchose">
+     	<div class=" col-md-4 col-lg-4" >  <p >可选数：</p></div>	 
+     	<div class="  col-md-8 col-lg-8 selectdiv" style="height:61px; width:60%"> 	
+     	<select class="choseNum" id="choseNum" name="suj_choseNum"  style=" background-color: rgba(10, 10, 10, 0.7);color:white; }">       
+					<option value="2" >2</option>
+              </select>     </div>  </div> 
+ <div class=" col-md-12 col-lg-12" > 
+         <button class="add rentbutton" type="button"  onclick="addInput()"> 添加选项</button>
+         </div>    
+     	 <input  type="submit" style="margin-top:40px;"  value="提交" name=submit  >
+     	
          
     </form>
    
@@ -121,7 +136,31 @@
    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript"> 
 	$(document).ready(function(){
+		
+		var  val=$("#sbj_type").val();
+		if(val==1){
+			$(".canchose").hide();
+			
+		}else if(val==2){
+			$(".canchose").show();
+		}
+		
+		$("#sbj_type").change(function(){
+			var  val=$("#sbj_type").val();
+			if(val==1){
+				$(".canchose").hide();
+				
+			}else if(val==2){
+				$(".canchose").show();
+			} 
+		});
+
+
+
+});
+	$(document).ready(function(){
 		var length=<%=list1.size()%>;
+		var chosenum= <%= sub.getChose_num()%>;
 	//	alert(length);
 	//获取选项名字
 		var list = new Array();
@@ -138,11 +177,18 @@
 			 if(i>=2){
 				 $chose=$(".option");
 					//alert($chose.length);
-					var num=$chose.length+1;
+					var num=$chose.length+1;//要添加的次序
 					/*   选项1：
 						<div class=" col-md-8 col-lg-8" >      */
-					var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p> 选项"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
+					var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p>选&nbsp;项&nbsp;"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
 					$("#other").append(inp); 
+					
+					if(chosenum==num){
+						var chose="<option id='option" +num+"' value='" +num+"' selected >"+num+"</option>";
+					}
+					else{
+					var chose="<option id='option" +num+"' value='" +num+"' >"+num+"</option>";}
+					$("#choseNum").append(chose); 
 					if(i==2){
 						var bt="<button class='delete' type='button' onclick='deleteInput()'> 删除选项</button> ";                  
 						
@@ -166,9 +212,12 @@
 		var num=$chose.length+1;
 		if(num<7){
 		 
-			var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p> 选项"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
+			var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p> 选&nbsp;项&nbsp;"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
 		
-		$("#other").append(inp);  }
+		$("#other").append(inp);
+		var chose="<option id='option" +num+"' value='" +num+"' >"+num+"</option>";
+		$("#choseNum").append(chose); 
+		}
 		else{
 		alert("最多只能六个选项");}
 		if(num==3){
@@ -188,7 +237,8 @@
 		if(num>2){
 			var id="#option"+num;
 			//alert(id);
-			$("div").remove(id);     
+			$("div").remove(id);    
+			$("option").remove(id);
 		}
 		if(num==3){
 			 

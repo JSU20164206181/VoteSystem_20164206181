@@ -12,7 +12,8 @@ h2 { font:bold 24px Arial, Helvetica, sans-serif; padding:8px 0; margin:8px 0; c
 p { margin:8px 0; padding:0 0 8px 0; font:normal 12px/1.8em Arial, Helvetica, sans-serif;}
 p.spec { text-align:right;}
 .black-herf {color:#000000; text-decoration:none;} /* 使特殊非链接颜色一致 */
- a{
+ a{  
+ 
             text-decoration: none;
         }
         /*默认状态*/
@@ -30,7 +31,7 @@ p.spec { text-align:right;}
         /*鼠标悬浮状态*/
          a:hover{
               color: #5489ce;
-               text-decoration:none;
+              text-decoration:none;
         }
         /*点击状态*/
          a:active{
@@ -100,18 +101,22 @@ h1 { margin:0; padding:20px 0; color:#e1e9df; font:bold 40px/1.2em Arial, Helvet
         /*默认状态*/
  .maincont_top_1        a:link{
             color: green;
+            text-decoration: none;
         }
         /*访问后得状态*/
-.maincont_top_1         a:visited{
+.maincont_top_1    a:visited{
            color: green;
+           text-decoration: none;
         }
         /*鼠标悬浮状态*/
   .maincont_top_1       a:hover{
             color: #5489ce;
+            text-decoration: none;
         }
         /*点击状态*/
  .maincont_top_1        a:active{
             color:#ffffff;
+            text-decoration: none;
         }
 .maincont_middle{background:whitesmoke; width: 98%; height: 1080px;margin-left: 1%; }
 

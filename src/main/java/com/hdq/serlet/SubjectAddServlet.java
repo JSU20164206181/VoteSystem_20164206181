@@ -38,20 +38,26 @@ public class SubjectAddServlet extends HttpServlet {
 		
 		String title=request.getParameter("suj_title");
 		String type=request.getParameter("suj_type");
+		String ch=request.getParameter("suj_choseNum");
 		String user=request.getParameter("suj_user");
 		String[] listoption=request.getParameterValues("opt_option");
+		
 		
 		
 		int type1 = 0;
 		if( type!=null){
 			 type1= Integer.parseInt(type);
 		}
-		
+		int chose_num = 0;
+		if( ch!=null){
+			 chose_num= Integer.parseInt(ch);
+		}
 		SubjectDao  dao=new SubjectDao();
 		Subject  suj =new Subject();
 		suj.setVs_title(title);
 		suj.setVs_type(type1);
 		suj.setVu_id(user);
+		suj.setChose_num(chose_num);
 		dao.addSbj(suj);
 		//
 		OptionDao dao2=new OptionDao();

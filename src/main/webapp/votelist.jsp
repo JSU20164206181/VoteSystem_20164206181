@@ -125,8 +125,9 @@
 <%
    }//--forend%>
    <div class="modal fade"  id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog" style="padding-left:0% ;">
-<div class="modal-content" style="opacity: 0.1;">	
+	<div class="modal-dialog" style="">
+<div class="modal-content" style="color:white; background-color: rgba(10, 10, 10, 0.77);opacity: 0.8;top: 40px; margin-bottom:100px;">	
+ 
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>    

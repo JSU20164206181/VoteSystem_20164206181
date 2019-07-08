@@ -34,6 +34,7 @@ public class SubjectUpdataServlet extends HttpServlet {
 		String suj_id=request.getParameter("suj_id");
 		String title=request.getParameter("suj_title");
 		String type=request.getParameter("suj_type");
+		String ch=request.getParameter("suj_choseNum");
 		String user=request.getParameter("suj_user");
 		String[] listoption=request.getParameterValues("opt_option");
 		
@@ -46,12 +47,18 @@ public class SubjectUpdataServlet extends HttpServlet {
 		if( suj_id!=null){
 			 id= Integer.parseInt(suj_id);
 		}
+		int chose_num = 0;
+		if( ch!=null){
+			 chose_num= Integer.parseInt(ch);
+		}
+		
 		SubjectDao  dao=new SubjectDao();
 		Subject  suj =new Subject();
 		suj.setVs_id(id);
 		suj.setVs_title(title);
 		suj.setVs_type(type1);
 		suj.setVu_id(user);
+		suj.setChose_num(chose_num);
 		dao.updataSbj(suj);
 		System.out.println(" id "+id);
 		System.out.println(" suj "+title);

@@ -126,7 +126,8 @@ public class SubjectDao  {
 					sbj.setVs_type(rs.getInt("VS_TYPE"));
 					sbj.setVu_id(rs.getString("VU_ID"));
 					sbj.setItem_num(getItemNum(sbj.getVs_id()));
-					sbj.setOption_num(getOptionNum(sbj.getVs_id()));					
+					sbj.setOption_num(getOptionNum(sbj.getVs_id()));
+					sbj.setChose_num(rs.getInt("CHOSE_NUM"));
 				}
 
 			} catch (SQLException e) {
@@ -156,6 +157,8 @@ public class SubjectDao  {
 				sbj.setVu_id(rs.getString("VU_ID"));
 				sbj.setItem_num(getItemNum(sbj.getVs_id()));
 				sbj.setOption_num(getOptionNum(sbj.getVs_id()));
+				sbj.setChose_num(rs.getInt("CHOSE_NUM"));
+				
 				sbjlist.add(sbj);
 			}
 
@@ -186,6 +189,7 @@ public class SubjectDao  {
 				sbj.setVu_id(rs.getString("VU_ID"));
 				sbj.setItem_num(getItemNum(sbj.getVs_id()));
 				sbj.setOption_num(getOptionNum(sbj.getVs_id()));
+				sbj.setChose_num(rs.getInt("CHOSE_NUM"));
 				sbjlist.add(sbj);
 			}
 
@@ -203,9 +207,9 @@ public class SubjectDao  {
 		
 			int num;
 			JDBCUtil util = new JDBCUtil();
-			String sql="insert into vote_subject(VS_TITLE,VS_TYPE,VU_ID)values(?,?,?)";
+			String sql="insert into vote_subject(VS_TITLE,VS_TYPE,VU_ID,CHOSE_NUM)values(?,?,?,?)";
 			try {
-				num = util.executeUpdate(sql,sbj.getVs_title(),sbj.getVs_type(),sbj.getVu_id()); 
+				num = util.executeUpdate(sql,sbj.getVs_title(),sbj.getVs_type(),sbj.getVu_id(),sbj.getChose_num()); 
 				if(num>0){
 					System.out.println(sbj.getVs_title()+"插入成功....");
 				}
@@ -224,9 +228,9 @@ public class SubjectDao  {
 			
 				int num;
 				JDBCUtil util = new JDBCUtil();
-				String sql="update vote_subject set VS_TITLE=?,VS_TYPE=? where VS_ID=?";
+				String sql="update vote_subject set VS_TITLE=?,VS_TYPE=?,CHOSE_NUM=? where VS_ID=?";
 				try {
-					num = util.executeUpdate(sql,sbj.getVs_title(),sbj.getVs_type(),sbj.getVs_id()); 
+					num = util.executeUpdate(sql,sbj.getVs_title(),sbj.getVs_type(),sbj.getChose_num(),sbj.getVs_id()); 
 					if(num>0){
 						System.out.println(sbj.getVs_title()+"更新成功....");
 					}

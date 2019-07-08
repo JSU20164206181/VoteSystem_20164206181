@@ -31,7 +31,7 @@
 		<div  id="login"   class="login w3layouts agileits">
 	<form action="login" method="post">
 				<input type="text"id="inp1" type="text" name="id"  onfocus="if($(this).val()=='用户账号不存在') {$(this).val(''); $(this).css('color','white');}" placeholder="用户名" required="">
-				<input type="password" id="inp2" type="password" name="pwd"  placeholder="密码" required="">
+				<input type="password" id="inp2" type="password" name="pwd"  placeholder="密码" required="required">
 				 <input type="text" name="vad" style=" width: 40%;" required="required" placeholder="验证码" />
         <a href="#" onclick="javascript: var dt=new Date();document.getElementById('code').src='validata?dt='+dt; " >
         <img id="code"  style="border:3px solid black;margin-left:15%;margin-top:8px" src="validata"/></a><br/>
@@ -68,7 +68,7 @@
 		<div  id="regist" class="register w3layouts agileits">
 			
 			<form action="RegistServlet" method="post">
-				<input  id="inp21" type="text"  autofocus="autofocus"   maxlength="10" name="id" placeholder="输入6~12位账号" onfocus="if($(this).val()=='用户账号已存在') {$(this).val(''); $(this).css('color','white');}"  required="">
+				<input  id="inp21" type="text"  autofocus=""   maxlength="10" name="id" placeholder="输入6~12位账号" onfocus="if($(this).val()=='用户账号已存在') {$(this).val(''); $(this).css('color','white');}"  required="">
 				<input  id="inp22" type="text" name="name"   maxlength="20" placeholder="输入昵称" ><br>
      			<input  id="inp23" type="text" name="password1"   placeholder=" 输入密 码" maxlength="20" /><br>
 				<input  id="inp24" type="text" name="password2"   placeholder="输入确认密码" maxlength="20" size="20"/><br>
@@ -101,7 +101,8 @@
 		          
 		                        var txt=xhr.responseText;  
 		                       /*  alert(txt+"11   n_id 111 "+(txt=="n_id")); */
-		                        if(txt=="h_id"){	
+		                        if(txt=="h_id_r"){	
+		                        	
 			  	                 $('#inp21').val("用户账号已存在"); 
 			  	                 $('#inp21').css("color","red"); 
 			  	                 
@@ -147,6 +148,8 @@
 			$("#regist").hide();
 			
   $("#toregist").click(function(){
+	  $('#inp21').val(""); 
+        $('#inp21').css("color","white"); 
   	$("#toregist").css("color","whitesmoke");
   	$("#tologin").css("color","grey");
    

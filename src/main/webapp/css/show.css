@@ -108,12 +108,13 @@ a{
         /*默认状态*/
          a:link{
           color: blue;
+           text-decoration: none;
           
         }
         /*访问后得状态*/
          a:visited{
-             color:  blue;;
-             opacity: 0.5;
+             color:  blue;
+            text-decoration: none;
         }
         /*鼠标悬浮状态*/
          a:hover{

@@ -20,7 +20,9 @@
 	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	 <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 
-
+<style>
+ 
+</style>
 
 </head>
 <!-- //Head -->
@@ -65,31 +67,41 @@
  	<input type="hidden" name="suj_id"  value="" size="20"/>
 		<div class="  col-md-4 col-lg-4" > <p >投票标题:</p>  </div>
 		<div class=" col-md-8 col-lg-8" > 
-		<input type="text" name="suj_title"  value="" size="20"/></div>
+		<input type="text" name="suj_title" required="required"  value="" size="20"/></div>
 		
 		<div class=" col-md-4 col-lg-4" >  <p >投票类型:</p></div>	
-		<div class="  col-md-8 col-lg-8" style="height:61px;padding-top:20px; "> 	
-		
-	<div style="margin-right:20px"><input  type="radio" name="suj_type" checked="checked" value="1" > 单选&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input   type="radio" name="suj_type" value="2"> 多选</div>
+		<div class="  col-md-8 col-lg-8 selectdiv" style="height:61px; width:60%"> 	
+	     <select class="" id="sbj_type" name="suj_type"  >
+                      <option value="1" selected>单选</option>
+                        <option value="2">多选</option>
+              </select>
 
 		</div>
 		
  
  		
-          <div class="col-md-12 col-lg-12" style="font-size:30px" > <p>选项列表</p></div>
+          <div class="col-md-12 col-lg-12" style="font-size:30px;margin-top:20px;" > <p>选项列表</p></div>
            
            
-        <div class="  col-md-4 col-lg-4" > <p >  选项1：</p>  </div>
+        <div class="  col-md-4 col-lg-4" > <p >  选&nbsp;项&nbsp;1：</p>  </div>
 		<div class=" col-md-8 col-lg-8" >            
-       <input  type="text" class="option" name="opt_option" id="value1" msize="20"/>  </div>
- 	    <div class="  col-md-4 col-lg-4" > <p > 选项2：</p>  </div>
+       <input  type="text" class="option" required="required"  name="opt_option" id="value1" msize="20"/>  </div>
+ 	    <div class="  col-md-4 col-lg-4" > <p > 选&nbsp;项&nbsp;2：</p>  </div>
 		<div class=" col-md-8 col-lg-8" > 
-        <input  type="text" class="option"  name="opt_option" id="value2" msize="20"/></div>
+        <input  type="text" class="option" required="required"   name="opt_option" id="value2" msize="20"/></div>
        
-     	<div id="other"> </div>               
-     	 <input  type="submit" style=" " value="提交" name=submit  >
-         <button class="add rentbutton" type="button" onclick="addInput()"> 添加选项</button>
+     	<div id="other"> </div>  
+     	<div class="canchose">
+     	<div class=" col-md-4 col-lg-4" >  <p >可选数：</p></div>	 
+     	<div class="  col-md-8 col-lg-8 selectdiv" style="height:61px; width:60%"> 	
+     	<select class="choseNum" id="choseNum" name="suj_choseNum"  style=" background-color: rgba(10, 10, 10, 0.7);color:white; }">
+                      <option value="2" selected>2</option>
+              </select>     </div>  </div> 
+ <div class=" col-md-12 col-lg-12" > 
+         <button class="add rentbutton" type="button"  onclick="addInput()"> 添加选项</button>
+         </div>    
+     	 <input  type="submit" style="margin-top:40px; "  value="提交" name=submit  >
+     	
         
          
     </form>
@@ -111,19 +123,47 @@
     
    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript"> 
-	function addInput(){
+	$(document).ready(function(){
+		
+		var  val=$("#sbj_type").val();
+		if(val==1){
+			$(".canchose").hide();
+			
+		}else if(val==2){
+			$(".canchose").show();
+		}
+		
+		$("#sbj_type").change(function(){
+			var  val=$("#sbj_type").val();
+			if(val==1){
+				$(".canchose").hide();
+				
+			}else if(val==2){
+				$(".canchose").show();
+			} 
+		});
+
+
+
+});
+     function addInput(){
 		$chose=$(".option");
+		
 		//alert($chose.length);
 		var num=$chose.length+1;
 		if(num<7){
 		 
-			var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p> 选项"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
-		
-		$("#other").append(inp);  }
+			var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p> 选&nbsp;项&nbsp;"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  required='required'  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
+			
+		$("#other").append(inp); 
+		var chose="<option id='option" +num+"' value='" +num+"' >"+num+"</option>";
+		$("#choseNum").append(chose); 
+		}
 		else{
-		alert("最多只能六个选项");}
+		alert("最多只能有六个选项");
+		}
 		if(num==3){
-			var bt="<button type='button' class='delete' onclick='deleteInput()'> 删除选项</button> ";                  
+			var bt="<button type='button'  class='delete' onclick='deleteInput()'> 删除选项</button> ";                  
 			
 			$(".add").after(bt);				
 		}
@@ -138,8 +178,11 @@
 		
 		if(num>2){
 			var id="#option"+num;
+			var id="#option"+num;
+			
 			//alert(id);
-			$("div").remove(id);     
+			$("div").remove(id);
+			$("option").remove(id);
 		}
 		if(num==3){
 			 
@@ -166,7 +209,9 @@
     		alert(error);
     		return false;
     	}
-    }	  
+    }	
+	 
+	
 	</script>   
 </body>
 </html>

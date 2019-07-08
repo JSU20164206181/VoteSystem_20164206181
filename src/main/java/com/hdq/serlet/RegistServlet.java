@@ -40,11 +40,11 @@ public class RegistServlet extends HttpServlet {
 		if(uid!=null){
 			if(dao.isExistName(uid)){
 			System.out.println("账号存在");
-			out.print("h_id");
+			out.print("h_id_r");
 			}		
 			else {
 			System.out.println("账号不存在");
-			out.print("n_id");}	
+			out.print("n_id_r");}	
 		}
 		//添加用户
 		User user=new User();

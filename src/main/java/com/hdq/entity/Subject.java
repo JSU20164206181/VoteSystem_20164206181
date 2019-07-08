@@ -7,6 +7,8 @@ private int vs_type;//单选，多选
 private String vu_id;//发布用户
 private int option_num;
 private int item_num;
+private int chose_num;
+
 public int getVs_id() {
 	return vs_id;
 }
@@ -42,5 +44,11 @@ public int getItem_num() {
 }
 public void setItem_num(int item_num) {
 	this.item_num = item_num;
+}
+public int getChose_num() {
+	return chose_num;
+}
+public void setChose_num(int chose_num) {
+	this.chose_num = chose_num;
 }
 }
