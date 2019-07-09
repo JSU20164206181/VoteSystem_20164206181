@@ -93,9 +93,9 @@ a{
         
 		.listopption {
 		width:80%;
+		height:50px;
 		margin-left:10%;
 		margin-top:10px;
-		paddin-top:15px;
 		padding-left:5px;
 		 border: 1px solid rgba(238, 238, 238, 0.41);
         border-width: thin;
@@ -114,7 +114,8 @@ a{
 		.text-center p{
 		font-size:16px;}
 		.optform p{
-		font-size:16px;}
+		font-size:16px;
+		margin-top:12px;}
 		</style>
 		
 		
@@ -146,21 +147,14 @@ Subject sub=(Subject)request.getAttribute("subject");%>
 					</div>
 					
 					<form  class="optform" action="takeOption" method="post">
-<input name="subject"  type="hidden" value="<%= sub.getVs_id() %>" > </br>
+                    <input name="subject"  type="hidden" value="<%= sub.getVs_id() %>" > </br>
 <% 	for(int i=0;i<list1.size();i++)
 {      
 		Option opt=(Option)list1.get(i);	
 %>            
-<div class="listopption">  
-<%if(sub.getVs_type()==1) {%>
-
-<p><input type="hidden" name="option" id="opt_r<%=i%>" value="<%=(i+1)+"."+opt.getOption_id() %>" >
-<%//System.out.println("opt.getOption_id()"+opt.getOption_id());
-}else{ %>
-<p><input type="hidden" name="option" id="opt_b<%=i%>" value="<%=(i+1)+"."+opt.getOption_id() %>" />
-<%//System.out.println("opt.getOption_id():"+opt.getOption_id());
-} %>
-<%=i+1 %>.&nbsp;<%= opt.getOption_name()%></p> 
+<div class="listopption" id="listopt<%=i %>" onclick="optOn(<%=opt.getOption_id() %>,<%=i %>)">  
+<p>
+<%=(char)('A'+i)%>.&nbsp;<%= opt.getOption_name()%></p> 
 	</div>						
 				
 						  <%} //--forend %>	
@@ -175,10 +169,46 @@ Subject sub=(Subject)request.getAttribute("subject");%>
 </body>
 <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript"> 
+	
 	$(document).ready(function(){
+		
 
 });
-    
+	
+	
+	var ch=new Array(); 
+	var divList=new Array();
+	var chosenum=<%=sub.getChose_num()+1%>;
+	function optOn(ID,i){
+		var divID="#listopt"+i;
+		var optID="#opt"+i;
+		var inp="<input type='hidden' name='option' id='opt"+i+"' value='"+ID+ "' >"        
+		          
+		//有就删除，无就添加
+	//	alert(ch.includes(optID)+"sssd"+ch.indexOf(optID));
+	    if(ch.includes(optID)){
+	     ch.splice(ch.indexOf(optID),1);
+	     divList.splice(ch.indexOf(divID),1);  
+	     $(optID).remove();
+	     $(divID).css("background-color","#333333");
+	    }else{
+	    	$(divID).append(inp); 
+	    	
+	    	$(divID).css("background-color","#000");
+	    	ch.push(optID);//尾部加
+	    	divList.push(divID);    	
+	    }
+		if(ch.length==chosenum){
+			var de=ch.shift();//头部减
+	      $(de).remove(); 
+	      var dde=divList.shift();
+	      $(dde).css("background-color","#333333");
+	     
+		}	
+		
+		
+	}
+ //fruits.shift()删除第一个push()尾部插入   
 
 	 
 	

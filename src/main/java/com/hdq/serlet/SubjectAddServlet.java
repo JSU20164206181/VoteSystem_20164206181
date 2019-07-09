@@ -57,7 +57,10 @@ public class SubjectAddServlet extends HttpServlet {
 		suj.setVs_title(title);
 		suj.setVs_type(type1);
 		suj.setVu_id(user);
-		suj.setChose_num(chose_num);
+		if(type1==1){
+			suj.setChose_num(1);
+		}
+		else{suj.setChose_num(chose_num);}
 		dao.addSbj(suj);
 		//
 		OptionDao dao2=new OptionDao();

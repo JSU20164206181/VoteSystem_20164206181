@@ -79,13 +79,38 @@ public class UserDao {
 		}finally{
 			util.close();
 		}
-		
-
 	}
 
-	public void update(User user) {
+	public void update(User user ,int chose){
 		// TODO Auto-generated method stub
-
+		// TODO Auto-generated method stub
+				int num=0;
+				JDBCUtil util = new JDBCUtil();
+				String sql1="update vote_user set VU_SEX=? where VU_USER_ID=?";
+				String sql2="update vote_user set VU_AGE=? where VU_USER_ID=?";
+				String sql3="update vote_user set VU_TYPE=? where VU_USER_ID=?";	
+				String sql4="update vote_user set VU_PHONE=? where VU_USER_ID=?";
+				try {
+					if(chose==1){
+					num = util.executeUpdate(sql1,user.getUser_sex(),user.getUser_id());
+					}
+					if(chose==2){
+						num = util.executeUpdate(sql2,user.getUser_age(),user.getUser_id());
+						}
+					if(chose==4){
+						num = util.executeUpdate(sql3,2,user.getUser_id());
+						}
+					if(chose==3){
+						num = util.executeUpdate(sql4,user.getUser_phone(),user.getUser_id());
+						}
+					if(num>0){
+						System.out.println(user.getUser_id()+"更新成功....");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}finally{
+					util.close();
+				}
 	}
 
 	public void delete(User user) {

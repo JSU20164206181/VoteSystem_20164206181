@@ -6,6 +6,28 @@ public class User {
 	private String user_password;
 	private int user_status;
 	private int  user_type;
+	private String user_sex;
+	private String user_phone;
+	private String  user_age;
+	
+	public String getUser_sex() {
+		return user_sex;
+	}
+	public void setUser_sex(String user_sex) {
+		this.user_sex = user_sex;
+	}
+	public String getUser_phone() {
+		return user_phone;
+	}
+	public void setUser_phone(String user_phone) {
+		this.user_phone = user_phone;
+	}
+	public String getUser_age() {
+		return user_age;
+	}
+	public void setUser_age(String user_age) {
+		this.user_age = user_age;
+	}
 	public String getUser_id() {
 		return user_id;
 	}

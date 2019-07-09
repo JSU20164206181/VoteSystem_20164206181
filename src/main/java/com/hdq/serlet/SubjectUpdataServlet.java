@@ -58,7 +58,11 @@ public class SubjectUpdataServlet extends HttpServlet {
 		suj.setVs_title(title);
 		suj.setVs_type(type1);
 		suj.setVu_id(user);
-		suj.setChose_num(chose_num);
+		if(type1==1){
+			suj.setChose_num(1);
+		}
+		else{
+		suj.setChose_num(chose_num);}
 		dao.updataSbj(suj);
 		System.out.println(" id "+id);
 		System.out.println(" suj "+title);

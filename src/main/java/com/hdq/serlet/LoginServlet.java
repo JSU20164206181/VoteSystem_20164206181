@@ -39,54 +39,54 @@ public class LoginServlet extends HttpServlet {
 	     String u_vad=request.getParameter("vad");
 	     String log=request.getParameter("log");
 	     HttpSession session=request.getSession();
-	     
+	     String uid=request.getParameter("uid");
 	     session.setAttribute("log", log);
-  	  
+	     UserDao dao=new UserDao();
 	    String vad=(String)session.getAttribute("rand");
-	     
-		
-		UserDao dao=new UserDao();
+	 
 		//账号验证
-		 String uid=request.getParameter("uid");
+	    System.out.println("aaaaaaaa"+u_id);
+		 if(u_id==null){
 		PrintWriter out = response.getWriter();
+		if(uid!=null){
 		if(uid!=null&&dao.isExistName(uid)){
-			System.out.println("账号存在");
+			//System.out.println("账号存在");
 			out.print("h_id");
 			
 		}
 		else if(uid!=null&&(!dao.isExistName(uid))){
-			System.out.println("账号不存在");
-			out.print("n_id");
-			
+			//System.out.println("账号不存在");
+			out.print("n_id");		
 		}
+		}
+		
+		 }
 		if(u_id!=null&&u_id!=""){
 		session.setAttribute("u_id", u_id);
 		}
 		//验证码验证
 		if(u_vad!=null &&u_vad!=""&&vad!=null&&vad!=""){	
 		if(vad.equalsIgnoreCase(u_vad)){
-			System.out.println("验证码正确");
+			//System.out.println("验证码正确");
 		}
 		else{
 			System.out.println("验证码错误");
+			//srequest.setAttribute("loginError","验证码错误！" );
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}	}
 		
 		//密码验证
 		if(u_pwd!=null&&u_pwd!=""&&u_id!=null&&u_id!=""){
 		if(dao.findPassWord(u_id).equals(u_pwd)){
-			System.out.println("密码正确");
+			//System.out.println("密码正确");
 	  	   session.setAttribute("u_pwd", u_pwd);
 	  	 session.setAttribute("u_type",dao.findType(u_id));
-		      if(dao.findType(u_id).equals("9")){
-		    	  request.getRequestDispatcher("backstage.jsp").forward(request, response);		
-		      }
-		      else{
+		    
 		    	  request.getRequestDispatcher("SubjectListServlet").forward(request, response);		 
-		      }
 		}
 		else{
 			System.out.println("密码错误" +dao.findPassWord(u_id) +" --" +u_pwd);
+			//request.setAttribute("loginError","密码错误" );
 			request.getRequestDispatcher("index.jsp").forward(request, response);			
 		}
 		}

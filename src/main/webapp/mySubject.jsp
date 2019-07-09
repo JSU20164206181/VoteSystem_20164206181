@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
    <script src="https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
@@ -21,7 +20,9 @@
 <%@ page import="com.hdq.dao.*" %>
 <%@ page import="java.util.List" %>
 
-<% String uid=(String)session.getAttribute("u_id"); %>
+<% String uid=(String)session.getAttribute("u_id"); 
+String u_type=(String)session.getAttribute("u_type"); 
+%>
      
     
 
@@ -48,10 +49,12 @@
     <div class="menu_header" style="width: 98%;margin-left: 1%;">
       <div class="menu_nav">
         <ul>
-        <li><a href="#">首页</a> </li>
+        
           <li ><a href="SubjectListServlet">投票列表</a></li>
-          <li class="active"><a href="mySubject">我的话题</a></li>
+            <li ><a href="addsubject.jsp">发布话题</a></li>
+          <li class="active"><a href="mySubject">话题管理</a></li>
           <li><a href="SofaExitServlet">安全退出</a></li>
+          <li><a href="index.jsp">登录</a></li>
           
         </ul>
       </div>
@@ -65,8 +68,18 @@
  	 
  	<div id="" class="maincont_top_1" > 
  	
- 	<a class="fa fa-reply" aria-hidden="true" href="SubjectListServlet"></a>
- 	<a href="addsubject.jsp"  class="fa fa-plus" aria-hidden="true"></a>
+ 	<p> <a class="fa fa-reply" aria-hidden="true" href="SubjectListServlet"></a>
+ 	<%if(u_type!=null){
+ 	if(u_type.equals("1")){ %>
+ 	<span style="font-size:20px ;margin-left:50px; color:black; md">   欢迎用户 &nbsp;<%=uid %> </span>
+ 	<%} else if(u_type.equals("2")){ %>
+ 	<span style="font-size:20px ;margin-left:50px;color:black;">   欢迎VIP用户  &nbsp;<%=uid %> </span>
+ <%} else if(u_type.equals("9")){ %>
+ 	<span style="font-size:20px ;margin-left:50px;color:black;">   欢迎管理员 &nbsp;<%=uid %> </span>
+ <%}} else{ %>
+ 	<span style="font-size:20px ;margin-left:50px;color:black;">   欢迎游客 </span>
+ 	<%} %>	
+ 	<a href="addsubject.jsp"  class="fa fa-plus" aria-hidden="true"></a></p>
  		</div>
  		
  	<div class="maincont_middle" >
@@ -183,7 +196,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>  
-
+  
 <div class="maincont_bottom">
     <% if(String.valueOf(pagenumber1)!=null&&String.valueOf(pageLast1)!=null)
 	{

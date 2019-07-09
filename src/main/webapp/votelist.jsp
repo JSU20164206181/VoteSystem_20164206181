@@ -26,8 +26,8 @@
      int  pageLast1=(Integer)request.getAttribute("pageLast1");	
      int  pagenumber1=(Integer)request.getAttribute("pagenumber1"); 
      //System.out.println(" @@@@111"+pagenumber1);
-    %>
-
+     String u_type=(String)session.getAttribute("u_type"); 
+%>
 	
 <div class="main">
   <div class="header" >
@@ -50,12 +50,18 @@
       <div class="clr"></div>
     <div class="menu_header" style="width: 98%;margin-left: 1%;">
       <div class="menu_nav">
-        <ul>
-        <li><a href="#">首页</a> </li>
-          <li class="active"><a href="SubjectListServlet">投票列表</a></li>
-          <li><a href="mySubject">我的话题</a></li>
-          <li><a href="SofaExitServlet">安全退出</a></li>
+        <ul> 
+         <li class="active"><a href="SubjectListServlet">投票列表</a></li>
+         
+          <%if(u_type!=null) {%>
+           <%if(u_type.equals("2")||u_type.equals("9")) {%>
+             <li ><a href="mySubject">话题管理</a></li>
+               <li ><a href="addsubject.jsp">发布话题</a></li>
+                <%} %>
+           <li><a href="SofaExitServlet">安全退出</a></li>
+          <%} %>
           
+          <li><a href="index.jsp">登录</a></li>
         </ul>
       </div>
     </div>
@@ -65,7 +71,21 @@
  
  <div  class="maincont">
  	<div id="" class="maincont_top" >	</div>
- 	<div id="" class="maincont_top_1" >	</div>
+ 	<div id="" class="maincont_top_1"  style="padding-top:20px;" > 
+ 	<p > 
+ 	<span  style="font-size:20px ;margin-left:50px;color:black;"> 
+ 	<%if(u_type!=null){
+ 	if(u_type.equals("1")){ %>
+ 	  欢迎用户 &nbsp;<%=uid %> </span>
+ 	<%} else if(u_type.equals("2")){ %>
+ 	  欢迎VIP用户  &nbsp;<%=uid %> </span>
+ <%} else if(u_type.equals("9")){ %>
+ 	  欢迎管理员 &nbsp;<%=uid %> </span>
+ <%}} else{ %>
+ 	  欢迎游客 </span>
+ 	<%} %>	
+ 	</p>
+ 		</div>
  	<div class="maincont_middle" >
  	 <div class="listcontant"  >
  	 	
@@ -141,7 +161,7 @@
 			<div  class="modal-footer" style="border: hidden;  align-content:center; text-align: center;">
 				<form action="index.jsp" method="post">
 			<button   type="submit"  class="send-button"  name="sbj_id" id="deleteUp"  style="  
-				color:blue;width: 100px;height: 40px;margin-right: 40px; margin-top: 50px;">
+				color:green;width: 100px;height: 40px;margin-right: 40px; margin-top: 50px;">
 					<strong >登&nbsp;录</strong>
 				</button>
 				<button type="button"  class="send-button" data-dismiss="modal"  style="  

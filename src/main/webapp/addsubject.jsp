@@ -80,7 +80,7 @@
 		
  
  		
-          <div class="col-md-12 col-lg-12" style="font-size:30px;margin-top:20px;" > <p>选项列表</p></div>
+          <div class="col-md-12 col-lg-12" style="font-size:30px;margin-top:20px;" > <p>选项列表<span style="font-size:20px;" >(最多六个选项)</span></p></div>
            
            
         <div class="  col-md-4 col-lg-4" > <p >  选&nbsp;项&nbsp;1：</p>  </div>
@@ -98,7 +98,7 @@
                       <option value="2" selected>2</option>
               </select>     </div>  </div> 
  <div class=" col-md-12 col-lg-12" > 
-         <button class="add rentbutton" type="button"  onclick="addInput()"> 添加选项</button>
+         <button class="add rentbutton" type="button" id="add1" onclick="addInput()"> 添加选项</button>
          </div>    
      	 <input  type="submit" style="margin-top:40px; "  value="提交" name=submit  >
      	
@@ -117,13 +117,13 @@
 
 
 		
-
-
+  
      
-    
+ 
    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript"> 
 	$(document).ready(function(){
+		
 		
 		var  val=$("#sbj_type").val();
 		if(val==1){
@@ -142,17 +142,24 @@
 				$(".canchose").show();
 			} 
 		});
-
-
+	
 
 });
+	/* $("#know").click(function(){
+	    // 动作触发后执行的代码!!
+		$("#error").hide();
+	});
+	 */
      function addInput(){
 		$chose=$(".option");
 		
 		//alert($chose.length);
 		var num=$chose.length+1;
+		if(num==6){	
+			$("button").remove(".add"); 			
+		}
 		if(num<7){
-		 
+		    
 			var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p> 选&nbsp;项&nbsp;"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  required='required'  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
 			
 		$("#other").append(inp); 
@@ -160,7 +167,7 @@
 		$("#choseNum").append(chose); 
 		}
 		else{
-		alert("最多只能有六个选项");
+		
 		}
 		if(num==3){
 			var bt="<button type='button'  class='delete' onclick='deleteInput()'> 删除选项</button> ";                  

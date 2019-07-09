@@ -93,7 +93,7 @@
 		
  <input   type="hidden" name="suj_user" value="<%=sub.getVu_id() %>"  msize="20"/>
  		
-          <div class="col-md-12 col-lg-12" style="font-size:30px;margin-top:20px;"   > <p>选项列表</p></div>
+          <div class="col-md-12 col-lg-12" style="font-size:30px;margin-top:20px;"   > <p>选项列表<span style="font-size:20px;" >(最多六个选项)</span></p></div>
            
            
         <div class="  col-md-4 col-lg-4" > <p >  选&nbsp;项&nbsp;1：</p>  </div>
@@ -174,7 +174,10 @@
 		<%}%>	  
 		//alert("test"+list[5]);
 		for(var i=0;i<list.length;i++){
-			 if(i>=2){
+			if(num==6){	
+				  			
+			}
+			 if(i>=2&&i<=5){
 				 $chose=$(".option");
 					//alert($chose.length);
 					var num=$chose.length+1;//要添加的次序
@@ -189,6 +192,7 @@
 					else{
 					var chose="<option id='option" +num+"' value='" +num+"' >"+num+"</option>";}
 					$("#choseNum").append(chose); 
+					
 					if(i==2){
 						var bt="<button class='delete' type='button' onclick='deleteInput()'> 删除选项</button> ";                  
 						
@@ -210,6 +214,9 @@
 		$chose=$(".option");
 		//alert($chose.length);
 		var num=$chose.length+1;
+		if(num==6){	
+			$(".add").hide(); 			
+		}
 		if(num<7){
 		 
 			var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p> 选&nbsp;项&nbsp;"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
@@ -219,7 +226,7 @@
 		$("#choseNum").append(chose); 
 		}
 		else{
-		alert("最多只能六个选项");}
+		}
 		if(num==3){
 			var bt="<button type='button' class='delete' onclick='deleteInput()'> 删除选项</button> ";                  
 			

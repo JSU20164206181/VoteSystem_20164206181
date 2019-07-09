@@ -22,7 +22,7 @@ public class OptionDao  {
 		
 		String sql1="insert into vote_option(VS_ID,VO_OPTION,VO_ORDER)values(?,?,?)";
 		String sql2="update vote_option set VO_OPTION=?where VO_ORDER=? and VS_ID=? ";//****
-		String sql3 = "delete from vote_option where VO_ORDER=? and VS_ID=? ";
+		String sql3 ="delete from vote_option where VO_ORDER=? and VS_ID=? ";
 		try {
 			con.setAutoCommit(false);
 			System.out.println("optnum:"+this.getOptNum(id)+" list.length: "+list.length);
