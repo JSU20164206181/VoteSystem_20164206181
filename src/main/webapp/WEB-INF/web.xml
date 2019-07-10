@@ -161,4 +161,35 @@
     <url-pattern>/SofaExitServlet</url-pattern>
     <url-pattern>/sofaExit</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserListServlet</display-name>
+    <servlet-name>UserListServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.UserListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserListServlet</servlet-name>
+    <url-pattern>/UserListServlet</url-pattern>
+    <url-pattern>/userlist</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Test</display-name>
+    <servlet-name>Test</servlet-name>
+    <servlet-class>com.hdq.serlet.Test</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Test</servlet-name>
+    <url-pattern>/Test</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Test2</display-name>
+    <servlet-name>Test2</servlet-name>
+    <servlet-class>com.hdq.serlet.Test2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Test2</servlet-name>
+    <url-pattern>/Test2</url-pattern>
+  </servlet-mapping>
 </web-app>

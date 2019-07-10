@@ -40,24 +40,7 @@ public class LoginFilter implements Filter {
 		     
 		     request.setCharacterEncoding("utf-8");
 			response.setContentType("text/html;charset=utf-8");
-			
-		     HttpSession session=request.getSession();		     
-		    String uid=(String)session.getAttribute("u_id");
-		    String upwd=(String)session.getAttribute("u_pwd");
-		    System.out.println("uid___aaa"+uid);
-		    
-		       if(uid==null||upwd==null||uid.equals("")||upwd.equals("")){
-		    	   response.sendRedirect("index.jsp");
-		    	  
-		       }else{
-		    	   
-		    	   arg2.doFilter(arg0, arg1);
-			    	  
-		       }
-		     
-		    	  
-		     
-		      
+		    	   arg2.doFilter(arg0, arg1);		      
 	}
 
 	/**

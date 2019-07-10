@@ -51,6 +51,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		 //获取选项
 		 OptionDao dao2=new OptionDao();
 		 List<Option> oplist=dao2.listOpt(id);
+		 
+		 
 		//System.out.println("num"+oplist.size());		 
 	      request.setAttribute("subject",sub );
 	      request.setAttribute("optionlist",oplist );

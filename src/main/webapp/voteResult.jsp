@@ -31,7 +31,7 @@ Subject sub=(Subject)request.getAttribute("subject");
 					<div class="section_title text-center">
 					
 				<h1> 投票主题：<%= sub.getVs_title() %></h1>
-				<p> 共<%= sub.getOption_num()%>个选项，已有<%=sub.getItem_num()%>个参与投票</p>
+				<p> 共<%= sub.getOption_num()%>个选项，已获得<%=sub.getItem_num()%>票</p>
 				<%if(sub.getVs_type()==1) {%>
 
 				<p> 此投票为单选</p>

@@ -4,93 +4,94 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.hdq.dao.UserDao;
-import com.hdq.entity.User;
+
+import net.sf.json.JSONObject;
 
 /**
  * Servlet implementation class LoginServlet
  */
+
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public LoginServlet() { 
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+    /**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    public void service(HttpServletRequest request, HttpServletResponse response)
+    protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		//账号，密码，验证码
-		 String u_id=request.getParameter("id");
-	     String u_pwd=request.getParameter("pwd");
-	     String u_vad=request.getParameter("vad");
-	     String log=request.getParameter("log");
+    	
+		 String user=request.getParameter("user"); 
+	     JSONObject jo = JSONObject.fromObject(user);
+	    
+	    String upas=(String)jo.get("count");
+	    String uid=(String)jo.get("password"); 
+	    String urand=(String)jo.get("rand");
+	    System.out.print("upas="+upas+"uid="+uid);
+	  	     
 	     HttpSession session=request.getSession();
-	     String uid=request.getParameter("uid");
-	     session.setAttribute("log", log);
 	     UserDao dao=new UserDao();
+	     PrintWriter out = response.getWriter();
 	    String vad=(String)session.getAttribute("rand");
-	 
-		//账号验证
-	    System.out.println("aaaaaaaa"+u_id);
-		 if(u_id==null){
-		PrintWriter out = response.getWriter();
-		if(uid!=null){
+	  
+	   
+		//账号验证	
 		if(uid!=null&&dao.isExistName(uid)){
-			//System.out.println("账号存在");
-			out.print("h_id");
+			System.out.println("账号存在");
+			session.setAttribute("u_id", uid);
+			//密码
+			if(dao.findPassWord(uid).equals(upas)){
+				//System.out.println("密码正确");
+		  	   session.setAttribute("u_pwd", upas);
+		  	   session.setAttribute("u_type",dao.findType(uid));
+		  	   //yzm
+		  	 if(vad.equalsIgnoreCase(urand)){
+					//System.out.println("验证码正确");
+		  		   out.print("success");
+				}
+				else{
+					System.out.println("验证码错误");
+					
+				}	
+				
+				//密码验证
+				if(upas!=null&&upas!=""&&upas!=null&&upas!=""){
+				
+				}
+				
+			    		 
+			}
+			else{
+				System.out.println("密码错误" );
+							
+			}
 			
 		}
 		else if(uid!=null&&(!dao.isExistName(uid))){
-			//System.out.println("账号不存在");
-			out.print("n_id");		
-		}
-		}
-		
-		 }
-		if(u_id!=null&&u_id!=""){
-		session.setAttribute("u_id", u_id);
-		}
-		//验证码验证
-		if(u_vad!=null &&u_vad!=""&&vad!=null&&vad!=""){	
-		if(vad.equalsIgnoreCase(u_vad)){
-			//System.out.println("验证码正确");
-		}
-		else{
-			System.out.println("验证码错误");
-			//srequest.setAttribute("loginError","验证码错误！" );
-			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}	}
-		
-		//密码验证
-		if(u_pwd!=null&&u_pwd!=""&&u_id!=null&&u_id!=""){
-		if(dao.findPassWord(u_id).equals(u_pwd)){
-			//System.out.println("密码正确");
-	  	   session.setAttribute("u_pwd", u_pwd);
-	  	 session.setAttribute("u_type",dao.findType(u_id));
-		    
-		    	  request.getRequestDispatcher("SubjectListServlet").forward(request, response);		 
-		}
-		else{
-			System.out.println("密码错误" +dao.findPassWord(u_id) +" --" +u_pwd);
-			//request.setAttribute("loginError","密码错误" );
-			request.getRequestDispatcher("index.jsp").forward(request, response);			
-		}
+			System.out.println("账号不存在");
+			out.print("nologincode");		
 		}
 		
+		
+		
+		
+	
 		
 		
 	}

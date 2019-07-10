@@ -1,7 +1,6 @@
 package com.hdq.serlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,19 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.hdq.dao.SubjectDao;
+import com.hdq.dao.UserDao;
 import com.hdq.entity.Subject;
+import com.hdq.entity.User;
 
 /**
- * Servlet implementation class MySubjectServlet
+ * Servlet implementation class UserListServlet
  */
-public class MySubjectServlet extends HttpServlet {
+public class UserListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MySubjectServlet() {
+    public UserListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,49 +32,36 @@ public class MySubjectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String pagenum=request.getParameter("pagenum1");
-		HttpSession session=request.getSession();
-		 String uid=(String)session.getAttribute("u_id"); 
-		 String u_type=(String)session.getAttribute("u_type"); 
+		  String pagenum=request.getParameter("pagenum1");
+		  HttpSession session=request.getSession();
+		  String uid=(String)session.getAttribute("u_id"); 
+		  String u_type=(String)session.getAttribute("u_type"); 
+		  
+		  if(u_type.equals("9"))
+		  {
+		  int pagesize=10;
 		 
-		 
-		 int pagesize=10;
-		 
-			int pagenumber=1;
-			if( pagenum!=null){
-			pagenumber=Integer.parseInt(pagenum);}
-			//
-			 
-			 int star=(pagenumber-1)*pagesize;
+		  int pagenumber=1;
+	      if( pagenum!=null){
+		  pagenumber=Integer.parseInt(pagenum);}
+	      int star=(pagenumber-1)*pagesize;
 			
-			 SubjectDao subjectlist=new SubjectDao();
+		  UserDao userlist=new UserDao();
 		    
-		    int all=subjectlist.getMySbjNum(uid);
-			  int pageLast=all/pagesize;
-			  if(all%pagesize>0){
+		  int all=userlist.getNum();
+		  int pageLast=all/pagesize;
+		  if(all%pagesize>0){
 				  pageLast++;
-			  }
-			 
-		
-		
-		
-		 Subject  sub=new Subject();
-		 
-		  List<Subject> rs=subjectlist.MySubjectList(star,pagesize,uid);
-		  if(u_type.equals("9")){
-			  rs=subjectlist.SubjectList(star,pagesize );
 		  }
-		/*  for(int i=0;i<rs.size();i++){
-			  sub=rs.get(i);
-			  System.out.println(uid+"--sub.getVu_id--"+sub.getVu_id());		
-		  }*/
-          request.setAttribute("subjectlist", rs);
+		
+		
+		  List<User> rs=userlist.SubjectList(star,pagesize);
+          request.setAttribute("userList", rs);
 	      request.setAttribute("pagenumber1",pagenumber );
 	      request.setAttribute("pageLast1",pageLast );
-		  request.getRequestDispatcher("mySubject.jsp").forward(request, response);
-	    	
-	}
-
+		  request.getRequestDispatcher("userList.jsp").forward(request, response);
+		  }
+		}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

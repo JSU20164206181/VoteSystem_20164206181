@@ -55,8 +55,9 @@
          
           <%if(u_type!=null) {%>
            <%if(u_type.equals("2")||u_type.equals("9")) {%>
+             <li ><a href="addsubject.jsp">发布话题</a></li>
              <li ><a href="mySubject">话题管理</a></li>
-               <li ><a href="addsubject.jsp">发布话题</a></li>
+             
                 <%} %>
            <li><a href="SofaExitServlet">安全退出</a></li>
           <%} %>
@@ -121,13 +122,14 @@
               
       </div>
       <div class="col-md-6 col-lg-4" >   
-          
+         	<a style=" font-size:16px;margin-right:30px;"  href="voteResult?sbj_id=<%= sbj.getVs_id() %>"> 查看结果 </a> 
         <%
         ItemDao dao3=new ItemDao();
         String status;
         if(uid==null){%>
        
         	<a data-toggle="modal" data-target="#myModal1"  style="font-size: 16px; "> 参与投票 </a>
+        	
          <% }else{
         
         if(dao3.haveIteam(uid,sbj.getVs_id())>0){%>

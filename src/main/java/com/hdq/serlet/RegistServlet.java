@@ -29,7 +29,7 @@ public class RegistServlet extends HttpServlet {
 			throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		//账号，密码，验证码
+		//账号，密码
 		 String u_id=request.getParameter("id");
 		 String u_name=request.getParameter("name");
 	     String u_pwd1=request.getParameter("password1");
@@ -73,8 +73,9 @@ public class RegistServlet extends HttpServlet {
 				&&user.getUser_phone()!=null&&user.getUser_phone()!=" "
 				&&user.getUser_age()!=null&&user.getUser_age()!=""){
 			dao.update(user, 4);
-		}
-		request.getRequestDispatcher("index.jsp").forward(request, response);	
+		} 
+		/*request.getRequestDispatcher("index.jsp").forward(request, response);	*/
+		response.sendRedirect("index.jsp");
 		}
 		//System.out.println(user);
 		

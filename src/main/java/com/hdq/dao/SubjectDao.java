@@ -107,6 +107,25 @@ public class SubjectDao  {
 		}
 
 		return num;
+	}	//my主题数量
+	public int getMySbjNum(String uid) {
+		int num = 0;
+		JDBCUtil util = new JDBCUtil();
+		String sql = "select count(*) from vote_subject where  VU_ID=? ";
+		ResultSet rs;
+		try {
+			rs = util.executeQuery(sql,uid);
+			if (rs.next()) {
+				num = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			util.close();
+		}
+
+		return num;
 	}
 	//查找主题信息
 		public Subject FindSubject(int id) {

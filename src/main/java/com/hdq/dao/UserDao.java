@@ -2,11 +2,67 @@ package com.hdq.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.hdq.entity.Subject;
 import com.hdq.entity.User;
 import com.hdq.util.JDBCUtil;
 
 public class UserDao {
+	//用户数量
+		public int getNum() {
+			int num = 0;
+			JDBCUtil util = new JDBCUtil();
+			String sql = "select count(*) from vote_user";
+			ResultSet rs;
+			try {
+				rs = util.executeQuery(sql);
+				if (rs.next()) {
+					num = rs.getInt(1);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				util.close();
+			}
+
+			return num;
+		}
+	//用户列表
+		public List<User> SubjectList(int start,int size) {
+			List<User> userlist = new ArrayList<User>();
+			JDBCUtil util = new JDBCUtil();
+			String sql = "select * from vote_user limit ?,?";
+			
+			ResultSet rs;
+			try {
+				
+				rs = util.executeQuery(sql,start,size);
+				User user = null;
+				while (rs.next()) {
+					user = new User();
+					user.setUser_id(rs.getString("VU_USER_ID"));
+					user.setUser_age(rs.getString("VU_AGE"));
+					user.setUser_sex(rs.getString("VU_SEX"));
+					user.setUser_name(rs.getString("VU_USER_NAME"));
+					user.setUser_type(rs.getInt("VU_TYPE"));
+					user.setUser_status(rs.getInt("VU_STATUS"));
+					user.setUser_phone(rs.getString("VU_PHONE"));
+					
+					
+					userlist.add(user);
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				util.close();
+			}
+
+			return userlist;
+		}
 	//查看权限
 		public String findType(String uid){
 			String result=null ;	
