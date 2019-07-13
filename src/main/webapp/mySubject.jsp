@@ -4,9 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-   <script src="https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
-   <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
    
    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
@@ -49,12 +46,19 @@ String u_type=(String)session.getAttribute("u_type");
     <div class="menu_header" style="width: 98%;margin-left: 1%;">
       <div class="menu_nav">
         <ul>
-        
           <li ><a href="SubjectListServlet">投票列表</a></li>
-            <li ><a href="addsubject.jsp">发布话题</a></li>
-          <li class="active"><a href="mySubject">话题管理</a></li>
-          <li ><a href="UserListServlet">用户管理</a></li>
-          <li><a href="SofaExitServlet">安全退出</a></li>
+         
+          <%if(u_type!=null) {%>
+           <%if(u_type.equals("2")||u_type.equals("9")) {%>
+            
+             <li class="active"><a href="mySubject">话题管理</a></li>
+             <%if(u_type.equals("9")) {%>
+               <li ><a href="UserListServlet">用户管理</a></li>
+             
+                <%} } %>
+           <li><a href="SofaExitServlet">安全退出</a></li>
+          <%} %>
+          
           <li><a href="index.jsp">登录</a></li>
           
         </ul>
@@ -69,7 +73,6 @@ String u_type=(String)session.getAttribute("u_type");
  	 
  	<div id="" class="maincont_top_1" > 
  	
- 	<p> <a class="fa fa-reply" aria-hidden="true" href="SubjectListServlet"></a>
  	<%if(u_type!=null){
  	if(u_type.equals("1")){ %>
  	<span style="font-size:20px ;margin-left:50px; color:black; md">   欢迎用户 &nbsp;<%=uid %> </span>
@@ -215,7 +218,7 @@ String u_type=(String)session.getAttribute("u_type");
 		}
 		else
 		{
-			out.println("<a style='color: gray;'>&nbsp下一页");
+			out.println("<a style='color: gray;'>&nbsp下一页</a>");
 		}
   }
     }   

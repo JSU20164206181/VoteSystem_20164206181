@@ -156,7 +156,7 @@
 		//alert($chose.length);
 		var num=$chose.length+1;
 		if(num==6){	
-			$("button").remove(".add"); 			
+			$(".add").hide(); 			
 		}
 		if(num<7){
 		    
@@ -196,6 +196,12 @@
 			$("button").remove(".delete");                 
 		
 		 }
+		if(num<=6){
+			 
+			$(".add").show();                
+		
+		 }
+		
 	
 	}
 	

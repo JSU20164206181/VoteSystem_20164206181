@@ -6,7 +6,7 @@
 <head>
 
 	<title>登录表单</title>
-
+	
 	<!-- Meta-Tags -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -31,22 +31,22 @@
 	<div class="container w3layouts agileits">
         <h2 ><a style="color: whitesmoke;" id="tologin" href="#">登 录</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style="color: grey;" id="toregist" href="#">注册</a></h2>
 		<div  id="login"   class="login w3layouts agileits">
-	<form action="" method="post">
+	<form action="#" id="form1" method="post">
 				<input type="text" id="count" type="text" name="id"  onfocus="if($(this).val()=='用户账号不存在') {$(this).val(''); $(this).css('color','white');}" placeholder="用户名" required="">
 				<input type="password" id="password" type="password" name="pwd"  placeholder="密码" required="required">
 				 <input type="text" name="vad" id="yangzheng" style=" width: 40%;" required="required" placeholder="验证码" />
         <a href="#" onclick="var dt=new Date();document.getElementById('code').src='validata?dt='+dt; " >
         <img id="code"  style="border:3px solid black;margin-left:15%;margin-top:8px" src="validata"/></a>
 			
-			<!-- <ul class="tick w3layouts agileits">
+		   <ul class="tick w3layouts agileits">
 				<li>
 					<input type="checkbox" id="brand1" value="">
 					<label for="brand1"><span></span>记住我</label>
 				</li>
-			</ul> -->
+			</ul> 
 			<div class="send-button w3layouts agileits">
 				
-					<input type="submit" id="loginBtn" value="登 录">
+					<input type="button" class="loginBtn" id="loginBtn" value="登 录">
 				
 			</div>
 			</form>
@@ -75,7 +75,7 @@
      			<input  id="inp23" type="password" name="password1"  required="required"  placeholder=" 输入密 码" maxlength="20" />
 				<input  id="inp24" type="password" name="password2" required="required" placeholder="输入确认密码" maxlength="20" />
       		  	
-		       <p class="information"  >完善个人信息</p>
+		      <input type="text" style="border:hidden;" class="information" value="完善个人信息"  >
 	          <select class="" id="inp25"   placeholder=" 性别" name="sex"  style="height:40px; width:241px; color:white;"  >
                       <option value="1" selected>男</option>
                         <option value="2">女</option>
@@ -110,7 +110,7 @@
     <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
  	 
-/* 		  inp21.onblur=function(){
+		  inp21.onblur=function(){
 		        var xhr=new XMLHttpRequest();
 		            
 		          xhr.onreadystatechange=function(){            
@@ -132,7 +132,7 @@
 		          xhr.open("get", "regist?uid2="+uid, true);   
 		          xhr.send(null);
 		          
-		    };  */
+		    };   
 		  /*   inp1.onblur=function(){
 		        var xhr=new XMLHttpRequest();
 		            
@@ -155,8 +155,46 @@
 		          
 		    }; */
 		   
-		    
- 
+			$(document).ready(function(){
+				 
+				$("#inp25").hide();
+				$("#inp26").hide();
+				$("#inp27").hide();
+				$("#regist").hide();
+				
+	  $("#toregist").click(function(){
+		  $('#inp21').val(""); 
+	        $('#inp21').css("color","white"); 
+	  	$("#toregist").css("color","whitesmoke");
+	  	$("#tologin").css("color","grey");
+	   
+	    $("#login").hide();
+	    $("#regist").show();
+	      
+	  });
+	   $("#tologin").click(function(){
+	   		$("#toregist").css("color","grey");
+	  	$("#tologin").css("color","whitesmoke");
+	    $("#regist").hide();
+	    $("#login").show();
+	  });
+	  
+	  
+	});	    
+		    $(".information").click(function(){
+		    	if( $(".information").val()=="完善个人信息"){
+		    	 $(".information").val("收起");
+		    	$("#inp25").show();
+				$("#inp26").show();
+				$("#inp27").show();
+		    	}
+		    	else{
+		    		 $(".information").val("完善个人信息");
+				    	$("#inp25").hide();
+						$("#inp26").hide();
+						$("#inp27").hide();	
+		    	}
+		    });
 		  
 		  $("#loginBtn").click(function(){
 			
@@ -179,27 +217,41 @@
 		
 			        //如果账号和密码都不为空，就进行 ajax 异步提交
 		        $.ajax({
-			            type:'POST', 
-			            url:'/LoginServlet', 
-			            data:{user:JSON.stringify(user)}, 
-			            dataType:'html',			          
+			            type:'post', 
+			            url:'LoginServlet',
+			            data:{user:JSON.stringify(user)}, 	  
+			            async: false,
+			            contentType: 'application/x-www-form-urlencoded',            
+			            dataType:'text',			          
 				      error:function(){  //请求失败的回调方法
 				                alert("请求失败！请重试。");        
 				         }, 
                     success:function(result){   
-			                if(result != "" && result == "success"){
+                    	
+			                if(result!=""&&result=="success"){
 			                //若登录成功
-			                    window.location.href='/SubjectListServlet';
+			               alert(result);
+			               window.location.href="${pageContext.request.contextPath}/SubjectListServlet";
+			               
 			                }else if(result == "failed"){			                 
-			                    alert("登录失败！请重试。");
+			                    alert("登录失败！\n");
 			                    $("#loginCode").val('');
 			                    $("#password").val('');
 			                }else if(result == "nologincode"){			               
-			                	 alert("登录账号不存在！请重试。");
+			                	 alert("登录账号不存在！\n");
+			                	 
 			                }else if(result == "pwderror"){
-			                    alert("登录密码错误！请重试。");
-			                }else if("nodata" == result){
-			                    alert("对不起，没有任何数据需要处理！请重试。");
+			                    alert("登录密码错误\n！"); 
+			                    $("#loginCode").val(user.count);
+			                    
+			                }else if( result =="randerror"){
+			                    alert("验证码错误！\n");
+			                    $("#password").val(user.password);
+			                    
+			                }else if( result =="bin"){
+			                    alert("该用户已被禁用！\n");
+			                   
+			                    
 			                }
 			            }
 			        }); 
@@ -207,29 +259,7 @@
 			    }
 			});		  		  
 //登录注册切换	
-	$(document).ready(function(){
-		
-			$("#regist").hide();
-			
-  $("#toregist").click(function(){
-	  $('#inp21').val(""); 
-        $('#inp21').css("color","white"); 
-  	$("#toregist").css("color","whitesmoke");
-  	$("#tologin").css("color","grey");
-   
-    $("#login").hide();
-    $("#regist").show();
-      
-  });
-   $("#tologin").click(function(){
-   		$("#toregist").css("color","grey");
-  	$("#tologin").css("color","whitesmoke");
-    $("#regist").hide();
-    $("#login").show();
-  });
-  
-  
-});
+
 	 function check(){
          
     	 
@@ -237,18 +267,18 @@
     	 
    	  if($('#inp21').val()==null||$('#inp21').val()==""||$('#inp21').val()=='用户账号已存在'){    
    		  
-   	      error=error+"账号不能为空\n ";
+   	      error=error+"账号不能为空</br> ";
             }
-   	if($('#inp22').val()==null||$('#inp22').val()==""){
+   	  else if($('#inp22').val()==null||$('#inp22').val()==""){
  	      error=error+"昵称不能为空\n ";
           }
-   	if($('#inp23').val()==null||$('#inp23').val()==""){
+   	  else 	if($('#inp23').val()==null||$('#inp23').val()==""){
 	      error=error+"密码不能为空\n ";
         }
-   	if($('#inp24').val()==null||$('#inp24').val()==""){
+   	  else 	if($('#inp24').val()==null||$('#inp24').val()==""){
 	      error=error+"确认密码不能为空\n ";
         }
-   	if($('#inp23').val()!=$('#inp24').val()){
+   	  else	if($('#inp23').val()!=$('#inp24').val()){
    		error=error+"密码不一致\n ";
    	}
    	    	 

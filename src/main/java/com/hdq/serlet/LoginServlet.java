@@ -18,12 +18,10 @@ import net.sf.json.JSONObject;
  * Servlet implementation class LoginServlet
  */
 
+@WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public LoginServlet() { 
         super();
         // TODO Auto-generated constructor stub
@@ -40,8 +38,8 @@ public class LoginServlet extends HttpServlet {
 		 String user=request.getParameter("user"); 
 	     JSONObject jo = JSONObject.fromObject(user);
 	    
-	    String upas=(String)jo.get("count");
-	    String uid=(String)jo.get("password"); 
+	    String uid=(String)jo.get("count");
+	    String upas=(String)jo.get("password"); 
 	    String urand=(String)jo.get("rand");
 	    System.out.print("upas="+upas+"uid="+uid);
 	  	     
@@ -57,28 +55,33 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("u_id", uid);
 			//密码
 			if(dao.findPassWord(uid).equals(upas)){
-				//System.out.println("密码正确");
+				System.out.println("密码正确");
 		  	   session.setAttribute("u_pwd", upas);
 		  	   session.setAttribute("u_type",dao.findType(uid));
 		  	   //yzm
 		  	 if(vad.equalsIgnoreCase(urand)){
-					//System.out.println("验证码正确");
-		  		   out.print("success");
+					System.out.println("验证码正确"+dao.findStatus(uid));
+					if(dao.findStatus(uid).equals("0")){
+						System.out.println("已禁用");
+						out.print("bin");
+					}
+					else{
+					out.print("success");}
+		  		   // response.sendRedirect("SubjectListServlet");
+		  		 
 				}
 				else{
 					System.out.println("验证码错误");
-					
+					out.print("randerror");
 				}	
 				
-				//密码验证
-				if(upas!=null&&upas!=""&&upas!=null&&upas!=""){
-				
-				}
+		
 				
 			    		 
 			}
 			else{
 				System.out.println("密码错误" );
+				out.print("pwderror");
 							
 			}
 			

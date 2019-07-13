@@ -4,14 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+ 	<!--  <link    rel="stylesheet"  href="bootstrap-4.3.1-dist/css/bootstrap.min.css" type="text/css" media="all">
+     <script   src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	 <script   src="bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
+	 
+	  
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
    <script src="https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
    
-   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 
 <link rel="stylesheet" href="css/style1.css" type="text/css" media="all">
 <title>用户管理</title>
 </head>
@@ -51,10 +55,18 @@ String u_type=(String)session.getAttribute("u_type");
         <ul>
         
           <li ><a href="SubjectListServlet">投票列表</a></li>
-            <li ><a href="addsubject.jsp">发布话题</a></li>
-          <li ><a href="mySubject">话题管理</a></li>
-            <li class="active"><a href="UserListServlet">用户管理</a></li>
-          <li><a href="SofaExitServlet">安全退出</a></li>
+         
+          <%if(u_type!=null) {%>
+           <%if(u_type.equals("2")||u_type.equals("9")) {%>
+            
+             <li ><a href="mySubject">话题管理</a></li>
+             <%if(u_type.equals("9")) {%>
+               <li class="active"><a href="UserListServlet">用户管理</a></li>
+             
+                <%} } %>
+           <li><a href="SofaExitServlet">安全退出</a></li>
+          <%} %>
+          
           <li><a href="index.jsp">登录</a></li>
           
         </ul>
@@ -144,7 +156,7 @@ String u_type=(String)session.getAttribute("u_type");
 		
 		<div class="col-md-8 col-lg-8"  style="padding-top:30px;">
 		 <div class="col-md-2 col-lg-2 " >
-    <%=i+1%>
+    <%= (pagenumber1-1)*10+i+1 %>
       </div>
 		<div class="col-md-3 col-lg-3 " >
           <%=user.getUser_id() %>
@@ -170,25 +182,58 @@ String u_type=(String)session.getAttribute("u_type");
    
       </div>       
       </div>
-      <div class="col-md-4 col-lg-4" > 
+      <div class="col-md-3 col-lg-3" > 
       
-     	 	<div class="col-md-6 col-lg-6" style="padding-top:0px; height:auto;" >
-       		修改权限
+     	 		<div class="col-md-3 col-lg-3" >
+       		  
     		  </div>
-    		   
-    		  <div class="col-md-6 col-lg-6" style="padding-top:0px;height:auto;"  >
-       		<%if(user.getUser_status()==1) {%>
-       		 <span style="color:red;font-size:20;" >  禁用</span>       
-       		<%}else{ %>
-       	 <span style=" color:green;font-size:20;" >	启用</span>  
-       		<%} %>
+    		  
+     	 	<div class="col-md-7 col-lg-7"  style="padding-top:30px;">
+       		 <a data-toggle="modal" data-target="#myModal"  onclick="UpdateUser('<%= user.getUser_id()%>')" > &nbsp;管理用户</a>
+   </div>
+<div class="col-md-2 col-lg-2" >
+       		 
     		  </div>
-      
       
   	</div>
   </div>
   </div>
 <%}//--forend  %> 	
+
+ <div class="modal fade"  id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="padding-left:8%">
+		<div class="modal-content" style="width: 400px ;height: 300px; top: 200px;background: url(images/main_bg.jpg);opacity: 0.8;">		
+			<div class="modal-footer" style="border: hidden;margin-top:30px; ">
+				<form action="UserUpdateServlet" method="post">
+				 	<div class="col-sm-3 col-md-3 col-lg-3" > <p style="font-size:20px;" >权限：</p></div>	 
+				 	
+     	  <div class="col-sm-7  col-md-7 col-lg-7 selectdiv" style="height:61px;"> 	
+     	  <select class="choseNum" id="choseNum" name="type"  style=" background-color: rgba(10, 10, 10, 0.7);color:white; width:200px;">       
+					<option  value="1" selected>普通用户</option>
+					<option value="2" >VIP用户</option>
+					<option value="9" >管理员</option>
+              </select>     </div>  
+       <div class="col-sm-2 col-md-2 col-lg-2" ></div>	
+        <div class=" col-sm-3 col-md-3 col-lg-3" > <p style="font-size:20px;">状态：</p></div>	 
+             <div class=" col-sm-7 col-md-7 col-lg-7 selectdiv" style="height:61px;"> 	
+     	  <select class="choseNum" id="choseNum" name="status"  style=" background-color:#141414;color:white; width:200px;">       
+					<option value="0" >禁用</option>
+					<option value="1" selected>启用</option>
+              </select>     </div>  
+      <div class="col-sm-2 col-md-2 col-lg-2" > </div>	
+				<input type="hidden" id="updateUser1" name="id">
+				<button type="submit"  class="send-button"   style="color:red;width: 100px;height: 40px;margin-right: 40px; margin-top: 50px;">
+				<strong>确 &nbsp;认</strong>
+				</button>
+				<button type="button"  class="send-button" data-dismiss="modal"  style="  
+		width: 100px;height: 40px;margin-right: 40px; margin-top: 50px;">
+					取&nbsp;消
+				</button>
+				</form>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>    
 <div class="maincont_bottom">
     <% if(String.valueOf(pagenumber1)!=null&&String.valueOf(pageLast1)!=null)
 	{
@@ -206,7 +251,7 @@ String u_type=(String)session.getAttribute("u_type");
 		}
 		else
 		{
-			out.println("<a style='color: gray;'>&nbsp下一页");
+			out.println("<a style='color: gray;'>&nbsp下一页</a>");
 		}
   }
     }   
@@ -223,36 +268,12 @@ String u_type=(String)session.getAttribute("u_type");
       <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">	
 
-	function Delete(ID){
-		$("#deleteUp").val(ID);		
+	function UpdateUser(ID){
+		//alert(ID);
+		$("#updateUser1").val(ID);	
+		//alert($("#updateUser1").val());
+
 	}
-	$(document).ready(function(){
-		
-			
-			$(".delete").hide();
-			$(".update").hide();		
-  $(".fa-paint-brush").mouseenter(function(){
-	  $(".delete").show();
-	 
-  });
-  
-  $(".fa-trash").mouseenter(function(){
-	  $(".update").show();
-      
-  });
- 
-  $(".fa-paint-brush").mouseleave(function(){
-	  $(" .delete").hide();
-      
-  });
-  
-  $(".fa-trash").mouseleave(function(){
-	  $(" .update").hide();
-      
-  });
-  
-  
-});
 	 
 	</script>
 </body>

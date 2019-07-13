@@ -98,10 +98,10 @@
            
         <div class="  col-md-4 col-lg-4" > <p >  选&nbsp;项&nbsp;1：</p>  </div>
 		<div class=" col-md-8 col-lg-8" >            
-       <input  type="text" class="option" name="opt_option" id="value1" msize="20"/>  </div>
+       <input  type="text" required="required" class="option" name="opt_option" id="value1" msize="20"/>  </div>
  	    <div class="  col-md-4 col-lg-4" > <p > 选&nbsp;项&nbsp;2：</p>  </div>
 		<div class=" col-md-8 col-lg-8" > 
-        <input  type="text" class="option"  name="opt_option" id="value2" msize="20"/></div>
+        <input  type="text" class="option" required="required"  name="opt_option" id="value2" msize="20"/></div>
        
      	<div id="other"> </div>               
      		<div class="canchose">
@@ -183,7 +183,7 @@
 					var num=$chose.length+1;//要添加的次序
 					/*   选项1：
 						<div class=" col-md-8 col-lg-8" >      */
-					var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p>选&nbsp;项&nbsp;"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
+					var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p>选&nbsp;项&nbsp;"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' required='required' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
 					$("#other").append(inp); 
 					
 					if(chosenum==num){
@@ -219,7 +219,7 @@
 		}
 		if(num<7){
 		 
-			var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p> 选&nbsp;项&nbsp;"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
+			var inp=" <div id='option" +num+"'><div class='col-md-4 col-lg-4' > <p> 选&nbsp;项&nbsp;"+num+":&nbsp;&nbsp;</p> </div><div class='col-md-8 col-lg-8' > <input  type='text' required='required' id='value" +num+"' class='option' name='opt_option' ></div></div> ";                  
 		
 		$("#other").append(inp);
 		var chose="<option id='option" +num+"' value='" +num+"' >"+num+"</option>";
@@ -252,7 +252,11 @@
 			$("button").remove(".delete");                 
 		
 		 }
-	
+		if(num<=6){
+			 
+			$(".add").show();                
+		
+		 }
 	}
 	
 	 function chosevalue(){

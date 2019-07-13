@@ -229,7 +229,7 @@ input[type="text"], input[type="password"]{
     margin-bottom: 10px;
 }
 
-.send-button input[type="submit"] {
+.send-button input[type="submit"],.loginBtn {
     width: 60%;
     margin-left: 20%;
     padding: 10px 0;
@@ -251,7 +251,7 @@ input[type="text"], input[type="password"]{
 
 /*--w3layouts--*/
 /*--agileits--*/
-.send-button input[type="submit"]:hover {
+.send-button input[type="submit"]:hover ,.loginBtn:hover{
     background-color: #000;
     border: 1px solid #FFF;
     color: #FFF;
@@ -550,7 +550,7 @@ input[type="text"], input[type="password"]{
     }
 }
 
-.myform input[type="text"], input[type="password"] {
+.myform input[type="text"], .myform input[type="password"] {
     width: 88%;
     margin-bottom: 20px;
     padding: 10px;

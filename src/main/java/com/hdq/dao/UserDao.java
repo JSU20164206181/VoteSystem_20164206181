@@ -10,6 +10,26 @@ import com.hdq.entity.User;
 import com.hdq.util.JDBCUtil;
 
 public class UserDao {
+	public void updataSbj(User user) {
+		// TODO Auto-generated method stub
+		
+			int num;
+			JDBCUtil util = new JDBCUtil();
+			String sql="update vote_user set VU_TYPE=?,VU_STATUS=? where VU_USER_ID=?";
+			try {
+				num = util.executeUpdate(sql,user.getUser_type(),user.getUser_status(),user.getUser_id()); 
+				if(num>0){
+					System.out.println(user.getUser_id()+"更新成功....");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				util.close();
+			}
+			
+
+		
+	}
 	//用户数量
 		public int getNum() {
 			int num = 0;
@@ -81,6 +101,24 @@ public class UserDao {
 			
 			return result;
 		}
+		//查看状态
+				public String findStatus(String uid){
+					String result=null ;	
+					JDBCUtil util = new JDBCUtil();
+					String sql = "select VU_STATUS from vote_user where VU_USER_ID=? ";
+					try {
+						ResultSet rs  = util.executeQuery(sql, uid);
+						if(rs.next()){
+							result = rs.getString(1);
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}finally{
+						util.close();
+					}
+					
+					return result;
+				}
 	//查找密码
 	public String findPassWord(String uid){
 		String result=null ;	

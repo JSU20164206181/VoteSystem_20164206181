@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
 <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
 		 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
@@ -50,16 +51,16 @@
             text-decoration: none;}
         /*默认状态*/
 .optshow a:link{
-          color: blue;
+          color: #5489ce;
            text-decoration:none;      
         }
         /*访问后得状态*/
 .optshow a:visited{
-             color:  blue;
+             color: #5489ce;
              text-decoration:none;  }
         /*鼠标悬浮状态*/
 .optshow  a:hover{
-              color: #5489ce;
+              color: blue;
                text-decoration:none; }
         /*点击状态*/
 .optshow a:active{              
@@ -116,6 +117,25 @@ a{
 		.optform p{
 		font-size:16px;
 		margin-top:12px;}
+	  #msg{
+    height: 2rem;
+    text-align: center;
+    position: fixed;
+    top: 40%;
+     padding-top:10px;
+    margin-top: -1rem;
+    line-height: 2rem;
+    width: 100%;
+}
+	#msg span{
+    color: red;
+    font-size:20px;
+    height: 2rem;
+    display: inline-block;
+    padding: 0 3rem;
+    border-radius: 5px;
+}        
+           
 		</style>
 		
 		
@@ -134,7 +154,7 @@ Subject sub=(Subject)request.getAttribute("subject");%>
 		<div class="section_title text-center " style=" ">
 					
 				<h1> 投票主题：<%= sub.getVs_title() %></h1>
-				<p> 已有<span style="color:#e1d5a1;"><%=sub.getItem_num()%></span>个参与投票</p>
+				<p> 已获得<span style="color:#e1d5a1;"><%=sub.getItem_num()%></span>票</p>
 				<%if(sub.getVs_type()==1) {%>
 
               <p> 此投票为单选，请选择一个选项</p>
@@ -158,7 +178,7 @@ Subject sub=(Subject)request.getAttribute("subject");%>
 	</div>						
 				
 						  <%} //--forend %>	
-						   <input  type="submit" value="确认投票" style=""  >
+						   <input  type="submit" onclick="return check();" value="确认投票" style=""  >
 						    </form>
 					
 				</div>
@@ -210,8 +230,27 @@ Subject sub=(Subject)request.getAttribute("subject");%>
 	}
  //fruits.shift()删除第一个push()尾部插入   
 
-	 
-	
+	  function check(){
+    	 if(ch.length==0){
+    		 alert("</br>至少投一票!</br>");
+    		 return false;
+    	 }  	 
+    	else{
+    		return true;
+    		
+    	}
+    }	
+	  
+		 //自定义警告框样式
+		 function alert(e){
+			    $("body").append("<div id='msg'><span>"+e+"</span></div>");
+			    clearmsg();
+			}
+			function clearmsg(){
+			    var t = setTimeout(function(){
+			        $("#msg").remove();
+			    },2000)
+			};
 	</script>   
 
 </html>

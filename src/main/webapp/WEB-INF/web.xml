@@ -11,17 +11,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.hdq.serlet.LoginServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-    <url-pattern>/login</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>ValidataServlet</display-name>
     <servlet-name>ValidataServlet</servlet-name>
     <servlet-class>com.hdq.serlet.ValidataServlet</servlet-class>
@@ -51,17 +40,6 @@
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/LoginFilter</url-pattern>
   </filter-mapping>
-  <servlet>
-    <description></description>
-    <display-name>SubjectListServlet</display-name>
-    <servlet-name>SubjectListServlet</servlet-name>
-    <servlet-class>com.hdq.serlet.SubjectListServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SubjectListServlet</servlet-name>
-    <url-pattern>/SubjectListServlet</url-pattern>
-    <url-pattern>/sbjlist</url-pattern>
-  </servlet-mapping>
   <servlet>
     <description></description>
     <display-name>SubjectAddServlet</display-name>
@@ -191,5 +169,15 @@
   <servlet-mapping>
     <servlet-name>Test2</servlet-name>
     <url-pattern>/Test2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserUpdateServlet</display-name>
+    <servlet-name>UserUpdateServlet</servlet-name>
+    <servlet-class>com.hdq.serlet.UserUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserUpdateServlet</servlet-name>
+    <url-pattern>/UserUpdateServlet</url-pattern>
   </servlet-mapping>
 </web-app>
